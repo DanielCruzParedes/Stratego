@@ -3,7 +3,7 @@ package stratego;
 import javax.swing.JOptionPane;
 
 public class PedirSegundoPlayer extends javax.swing.JFrame {
-    private boolean turnoHeroes = true;
+    public String bandoElegido;
     ControladorLogin controladorlogin;
     Login login;
 MenuPrincipal menu;
@@ -162,7 +162,8 @@ MovimientosDeFichas movimientos;
                 JOptionPane.showMessageDialog(null, "El segundo player no puede ser el mismo que el primer player.");
             }else{
             if(user.getUser().equals(segundoplayer)){
-            Tablero tablero = new Tablero();
+            Tablero tablero = new Tablero(this, controladorlogin, login);
+            this.bandoElegido=Cb_bandos.getSelectedItem().toString();
             tablero.setVisible(true);
             this.dispose();
                 
@@ -183,7 +184,7 @@ MovimientosDeFichas movimientos;
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void Cb_bandosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cb_bandosActionPerformed
-
+        bandoElegido = Cb_bandos.getSelectedItem().toString();
     }//GEN-LAST:event_Cb_bandosActionPerformed
 
     /**

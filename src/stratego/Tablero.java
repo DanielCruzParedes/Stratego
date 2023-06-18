@@ -22,8 +22,9 @@ public class Tablero extends JFrame implements ActionListener {
 
     ControladorLogin controladorlogin;
     Login login;
-
-    private boolean turnoHeroes = true;
+    PedirSegundoPlayer pedirsegundoplayer;
+    
+    public boolean turnoHeroes;
 
     private JButton Bt_rendirse;
     JLabel labelTurno = new JLabel("Texto del JLabel");
@@ -54,7 +55,16 @@ public class Tablero extends JFrame implements ActionListener {
     ArrayList<String> rangossobrantesH = new ArrayList();
     ArrayList<String> rangossobrantesV = new ArrayList();
 
-    public Tablero() {
+    public Tablero(PedirSegundoPlayer pedirsegundoplayer, ControladorLogin controladorlogin, Login login) {
+        this.controladorlogin=controladorlogin;
+        this.login=login;
+        if (pedirsegundoplayer.bandoElegido.equals("HEROES")) {
+        turnoHeroes = true;
+    } else if (pedirsegundoplayer.bandoElegido.equals("VILLANOS")) {
+        turnoHeroes = false;
+    }
+        
+        
 
         //Rangos 2 Heroes
         rangos2Heroes.add("GambitH");
@@ -220,7 +230,7 @@ public class Tablero extends JFrame implements ActionListener {
 
                     }
                 });
-                boton.setPreferredSize(new Dimension(80, 65));
+                boton.setPreferredSize(new Dimension(80, 80));
                 gbc.gridx = columna;
                 gbc.gridy = fila;
                 tableroPanel.add(boton, gbc);
@@ -1205,9 +1215,6 @@ public class Tablero extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        new Tablero();
-    }
 }
 
 class Ficha {

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 public class UniversoMarvel extends javax.swing.JFrame {
     Login login;
-    ControladorLogin controladorlogin =new ControladorLogin();
+    ControladorLogin controladorlogin;
     private int puntos=0,posicion=0;
     public UniversoMarvel(Login login, ControladorLogin controladorlogin) {
         initComponents();
         setLocationRelativeTo(null);
         this.login=login;
+        this.controladorlogin=controladorlogin;
        
         ArrayList<Usuario> words = controladorlogin.listaUsuarios;
         
