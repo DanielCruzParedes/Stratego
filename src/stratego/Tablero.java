@@ -17,21 +17,21 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 public class Tablero extends JFrame implements ActionListener {
 
     ControladorLogin controladorlogin;
     Login login;
     PedirSegundoPlayer pedirsegundoplayer;
-    
+    MenuPrincipal menuprincipal;
+
     public boolean turnoHeroes;
 
     private JButton Bt_rendirse;
     JLabel labelTurno = new JLabel("Texto del JLabel");
-    JLabel eliminadasH=new JLabel();
-    JLabel eliminadasV=new JLabel();
-    JPanel fichasEliminadasH = new JPanel(new GridBagLayout());
-    JPanel fichasEliminadasV = new JPanel(new GridBagLayout());
+    JTextArea eliminadasH = new JTextArea();
+    JTextArea eliminadasV = new JTextArea();
 
     //Para los movimientos
     private String textoPrimeraFichaSeleccionada;
@@ -46,7 +46,9 @@ public class Tablero extends JFrame implements ActionListener {
     private boolean GananVillanos;
     private int FichasRestantesVillanos = 33;
     private int FichasRestantesHeroes = 33;
-    
+    private String heroes;
+    private String villanos;
+
     private int vecesClickeadas = 0;
     private JButton botonClickeado;
     private JButton[][] botones;
@@ -56,15 +58,19 @@ public class Tablero extends JFrame implements ActionListener {
     ArrayList<String> rangossobrantesV = new ArrayList();
 
     public Tablero(PedirSegundoPlayer pedirsegundoplayer, ControladorLogin controladorlogin, Login login) {
-        this.controladorlogin=controladorlogin;
-        this.login=login;
+        this.controladorlogin = controladorlogin;
+        this.login = login;
+        this.pedirsegundoplayer = pedirsegundoplayer;
+        this.menuprincipal = new MenuPrincipal(login, controladorlogin);
         if (pedirsegundoplayer.bandoElegido.equals("HEROES")) {
-        turnoHeroes = true;
-    } else if (pedirsegundoplayer.bandoElegido.equals("VILLANOS")) {
-        turnoHeroes = false;
-    }
-        
-        
+            turnoHeroes = true;
+            heroes = controladorlogin.UsuarioLogeado;
+            villanos = pedirsegundoplayer.segundoPlayer;
+        } else if (pedirsegundoplayer.bandoElegido.equals("VILLANOS")) {
+            turnoHeroes = false;
+            heroes = pedirsegundoplayer.segundoPlayer;
+            villanos = controladorlogin.UsuarioLogeado;
+        }
 
         //Rangos 2 Heroes
         rangos2Heroes.add("GambitH");
@@ -143,8 +149,10 @@ public class Tablero extends JFrame implements ActionListener {
         setTitle("Tablero de Botones");
         setResizable(false);
 
-        botones = new JButton[10][10];
 
+        Font Arial = new Font("Arial", Font.BOLD, 18);
+        botones = new JButton[10][10];
+        
         // Crear el contenedor principal (JPanel) con GridBagLayout
         JPanel mainPanel = new JPanel(new GridBagLayout());
         Color fondoMainPanel = new Color(12, 81, 109);
@@ -160,30 +168,35 @@ public class Tablero extends JFrame implements ActionListener {
         tableroPanel.setBounds(380, 100, 790, 628);
         tableroPanel.setLayout(new GridBagLayout());
         
-        // JPanel de fichas heroes
-        fichasEliminadasH.setLayout(null);
-        fichasEliminadasH .setBackground(Color.magenta);
-        fichasEliminadasH .setBounds(1280, 80, 240, 600);
-        add(fichasEliminadasH);
-        
-        //label para fichas heroes
+        //Area de texto para fichas heroes
+        JLabel fichasvencidasH=new JLabel("FICHAS ELIMINADAS HEROES");
+        fichasvencidasH.setFont(Arial);
+        fichasvencidasH.setBounds(1250, 100, 500, 25);
+        fichasvencidasH.setForeground(Color.WHITE);
+        add(fichasvencidasH);
+        Color colorarea=new Color(0,0,102);
+        eliminadasH.setFont(Arial);
+        eliminadasH.setForeground(Color.WHITE);
         eliminadasH.setLayout(null);
-        eliminadasH.setBounds(1280,80,240,600);
-        eliminadasH.setOpaque(true);
+        eliminadasH.setBounds(1280,140,240,600);
+        
         add(eliminadasH);
+        eliminadasH.setBackground(colorarea);
         
-        // JPanel de fichas villanos
-        fichasEliminadasV.setLayout(null);
-        fichasEliminadasV .setBackground(Color.MAGENTA);
-        fichasEliminadasV .setBounds(20, 80, 240, 600);
-        add(fichasEliminadasV);
-        
-        //label para fichas villanos
+        //Area de texto para fichas villanos
+        JLabel fichasvencidasV=new JLabel("FICHAS ELIMINADAS VILLANOS");
+        fichasvencidasV.setFont(Arial);
+        fichasvencidasV.setBounds(20, 100, 500, 25);
+        fichasvencidasV.setForeground(Color.WHITE);
+        add(fichasvencidasV);
+        eliminadasV.setFont(Arial);
+        eliminadasV.setForeground(Color.WHITE);
         eliminadasV.setLayout(null);
-        eliminadasV.setBounds(20,80,240,600);
-        eliminadasV.setOpaque(true);
-        add(eliminadasV);
+        eliminadasV.setBounds(20,140,240,600);
+        eliminadasV.setEditable(false);
         
+        add(eliminadasV);
+        eliminadasV.setBackground(colorarea);
         //boton rendirse
         Bt_rendirse = new JButton();
         Bt_rendirse.setText("RENDIRSE");
@@ -199,7 +212,7 @@ public class Tablero extends JFrame implements ActionListener {
         gbcTurnos.insets = new Insets(10, 10, 0, 0); // Márgenes internos del JLabel
         gbcTurnos.gridx = 0; // Posición en la cuadrícula X
         gbcTurnos.gridy = 0; // Posición en la cuadrícula Y
-
+          
         for (int fila = 0; fila < 10; fila++) {
             for (int columna = 0; columna < 10; columna++) {
                 JButton boton = new JButton("");
@@ -248,12 +261,11 @@ public class Tablero extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridy = 1;
         mainPanel.add(tableroPanel, gbc);
-
+        
         //Agregar el label de turnos al contenedor principal
         mainPanel.add(labelTurno, gbcTurnos);
-        Font Arial = new Font("Arial", Font.BOLD, 18);
         labelTurno.setFont(Arial);
-        labelTurno.setForeground(Color.BLACK);
+        labelTurno.setForeground(Color.WHITE);
 
         // Agregar el contenedor principal al JFrame
         add(mainPanel);
@@ -321,8 +333,7 @@ public class Tablero extends JFrame implements ActionListener {
         if (e.getSource() == Bt_rendirse) {
             int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea rendirse?", "", JOptionPane.YES_NO_OPTION);
             if (respuesta == 0) {
-                this.controladorlogin = new ControladorLogin();
-                MenuPrincipal menuprincipal = new MenuPrincipal(login, controladorlogin);
+                
                 menuprincipal.setVisible(true);
                 this.dispose();
             }
@@ -815,7 +826,7 @@ public class Tablero extends JFrame implements ActionListener {
                 } else if (textoPrimeraFichaSeleccionada.equals(textoSegundaFichaSeleccionada)) {
                     JOptionPane.showMessageDialog(null, "No puedes moverte al mismo lugar.");
                     vecesClickeadas = 0;
-                } else if (esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == false){
+                } else if (esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == false) {
                     JOptionPane.showMessageDialog(null, "Movimiento invalido.");
                 }
                 //Inicia pelea Villano contra Heroe
@@ -850,7 +861,7 @@ public class Tablero extends JFrame implements ActionListener {
                 System.out.println("Entra al ganador es heroe");
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
 
@@ -865,7 +876,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -879,7 +890,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -893,7 +904,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -907,7 +918,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("ApocalypseV") || textoSegundaFichaSeleccionada.equals("Green-GoblinV") || textoSegundaFichaSeleccionada.equals("VenomV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -922,7 +933,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("ApocalypseV") || textoSegundaFichaSeleccionada.equals("Green-GoblinV") || textoSegundaFichaSeleccionada.equals("VenomV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -936,7 +947,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("ApocalypseV") || textoSegundaFichaSeleccionada.equals("Green-GoblinV") || textoSegundaFichaSeleccionada.equals("VenomV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV") && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -951,7 +962,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("ApocalypseV") || textoSegundaFichaSeleccionada.equals("Green-GoblinV") || textoSegundaFichaSeleccionada.equals("VenomV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("AbominationV") || textoSegundaFichaSeleccionada.equals("ThanosV") || textoSegundaFichaSeleccionada.equals("Black-CatV") || textoSegundaFichaSeleccionada.equals("SabretoothV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -966,7 +977,7 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("Dr-DoomV") || textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("ApocalypseV") || textoSegundaFichaSeleccionada.equals("Green-GoblinV") || textoSegundaFichaSeleccionada.equals("VenomV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("AbominationV") || textoSegundaFichaSeleccionada.equals("ThanosV") || textoSegundaFichaSeleccionada.equals("Black-CatV") || textoSegundaFichaSeleccionada.equals("SabretoothV") || textoSegundaFichaSeleccionada.equals("JuggernautV") || textoSegundaFichaSeleccionada.equals("RhinoV") || textoSegundaFichaSeleccionada.equals("CarnageV") || textoSegundaFichaSeleccionada.equals("Mole-ManV") || textoSegundaFichaSeleccionada.equals("LizardV")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
@@ -980,11 +991,11 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("GalactusV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("KingpinV") || textoSegundaFichaSeleccionada.equals("MagnetoV") || textoSegundaFichaSeleccionada.equals("ApocalypseV") || textoSegundaFichaSeleccionada.equals("Green-GoblinV") || textoSegundaFichaSeleccionada.equals("VenomV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("BullseyeV") || textoSegundaFichaSeleccionada.equals("Omega-redV") || textoSegundaFichaSeleccionada.equals("OnslaughtV") || textoSegundaFichaSeleccionada.equals("Red-skullV") || textoSegundaFichaSeleccionada.equals("AbominationV") || textoSegundaFichaSeleccionada.equals("ThanosV") || textoSegundaFichaSeleccionada.equals("Black-CatV") || textoSegundaFichaSeleccionada.equals("SabretoothV") || textoSegundaFichaSeleccionada.equals("JuggernautV") || textoSegundaFichaSeleccionada.equals("RhinoV") || textoSegundaFichaSeleccionada.equals("CarnageV") || textoSegundaFichaSeleccionada.equals("Mole-ManV") || textoSegundaFichaSeleccionada.equals("LizardV") || rangos2Villanos.contains(textoSegundaFichaSeleccionada)) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraV")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraV")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananHeroes = true;
             }
         }
-        
+
         //VILLANOS==========================================================================================================================================        
 //Para la rango 10 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("Dr-DoomV")) {
@@ -994,7 +1005,7 @@ public class Tablero extends JFrame implements ActionListener {
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
 
@@ -1020,113 +1031,161 @@ public class Tablero extends JFrame implements ActionListener {
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") ) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
-         //Para la rango 7 de los villanos
+        //Para la rango 7 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("ApocalypseV") || textoPrimeraFichaSeleccionada.equals("Green-GoblinV") || textoPrimeraFichaSeleccionada.equals("VenomV")) {
-            if (textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("nova-blast")) {
+            if (textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("nova-blast")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") ) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
         //Para la rango 6 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("BullseyeV") || textoPrimeraFichaSeleccionada.equals("Omega-redV") || textoPrimeraFichaSeleccionada.equals("OnslaughtV") || textoPrimeraFichaSeleccionada.equals("Red-skullV")) {
-            if (textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH")|| textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH")||textoSegundaFichaSeleccionada.equals("nova-blast")) {
+            if (textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH") || textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("nova-blast")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") ) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
         //Para la rango 5 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("MystiqueV") || textoPrimeraFichaSeleccionada.equals("MysterioV") || textoPrimeraFichaSeleccionada.equals("Dr-OctopusV") || textoPrimeraFichaSeleccionada.equals("DeadpoolV")) {
-            if (textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH")|| textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH")||textoSegundaFichaSeleccionada.equals("nova-blast")) {
+            if (textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH") || textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("nova-blast")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH")|| textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH")) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH") || textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
         //Para la rango 4 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("AbominationV") || textoPrimeraFichaSeleccionada.equals("ThanosV") || textoPrimeraFichaSeleccionada.equals("Black-CatV") || textoPrimeraFichaSeleccionada.equals("SabretoothV")) {
-            if (textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH")|| textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH")||textoSegundaFichaSeleccionada.equals("nova-blast")) {
+            if (textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH") || textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH") || textoSegundaFichaSeleccionada.equals("nova-blast")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH")|| textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH")|| textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH")) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH") || textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH") || textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
-         //Para la rango 3 de los villanos
+        //Para la rango 3 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("JuggernautV") || textoPrimeraFichaSeleccionada.equals("RhinoV") || textoPrimeraFichaSeleccionada.equals("CarnageV") || textoPrimeraFichaSeleccionada.equals("Mole-ManV") || textoPrimeraFichaSeleccionada.equals("LizardV")) {
-            if (textoSegundaFichaSeleccionada.equals("Emma-FrostH") || textoSegundaFichaSeleccionada.equals("She-HulkH")|| textoSegundaFichaSeleccionada.equals("Giant-ManH") || textoSegundaFichaSeleccionada.equals("BeastH")||textoSegundaFichaSeleccionada.equals("ColosusH")) {
+            if (textoSegundaFichaSeleccionada.equals("Emma-FrostH") || textoSegundaFichaSeleccionada.equals("She-HulkH") || textoSegundaFichaSeleccionada.equals("Giant-ManH") || textoSegundaFichaSeleccionada.equals("BeastH") || textoSegundaFichaSeleccionada.equals("ColosusH")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH")|| textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH")|| textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH")|| textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH")) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH") || textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH") || textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH") || textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
-         //Para los rango 2 de los villanos
+        //Para los rango 2 de los villanos
         if (rangos2Villanos.contains(textoPrimeraFichaSeleccionada)) {
             if (rangos2Heroes.contains(textoSegundaFichaSeleccionada) || textoSegundaFichaSeleccionada.equals("nova-blast")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH")|| textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH")|| textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH")|| textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH") || textoSegundaFichaSeleccionada.equals("Emma-FrostH") || textoSegundaFichaSeleccionada.equals("She-HulkH")|| textoSegundaFichaSeleccionada.equals("Giant-ManH") || textoSegundaFichaSeleccionada.equals("BeastH")||textoSegundaFichaSeleccionada.equals("ColosusH")) {
+            if (textoSegundaFichaSeleccionada.equals("Mr-FantasticH") || textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH") || textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH") || textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH") || textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH") || textoSegundaFichaSeleccionada.equals("Emma-FrostH") || textoSegundaFichaSeleccionada.equals("She-HulkH") || textoSegundaFichaSeleccionada.equals("Giant-ManH") || textoSegundaFichaSeleccionada.equals("BeastH") || textoSegundaFichaSeleccionada.equals("ColosusH")) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
-         //Para los rango 1 de los villanos
+        //Para los rango 1 de los villanos
         if (textoPrimeraFichaSeleccionada.equals("Black-WidowV")) {
-            if (textoSegundaFichaSeleccionada.equals("BlackWidowH") ||textoSegundaFichaSeleccionada.equals("nova-blast")) {
+            if (textoSegundaFichaSeleccionada.equals("BlackWidowH") || textoSegundaFichaSeleccionada.equals("nova-blast")) {
                 ganador = "ninguno";
             } else {
                 ganador = textoPrimeraFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH")|| textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH")|| textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH")|| textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH")|| textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH") || textoSegundaFichaSeleccionada.equals("Emma-FrostH") || textoSegundaFichaSeleccionada.equals("She-HulkH")|| textoSegundaFichaSeleccionada.equals("Giant-ManH") || textoSegundaFichaSeleccionada.equals("BeastH")||textoSegundaFichaSeleccionada.equals("ColosusH") || rangos2Heroes.contains(textoSegundaFichaSeleccionada)) {
+            if (textoSegundaFichaSeleccionada.equals("Capitan-AmericaH") || textoSegundaFichaSeleccionada.equals("ProfesorXH") || textoSegundaFichaSeleccionada.equals("Nick-FuryH") || textoSegundaFichaSeleccionada.equals("SpidermanH") || textoSegundaFichaSeleccionada.equals("WolverineH") || textoSegundaFichaSeleccionada.equals("NamorH") || textoSegundaFichaSeleccionada.equals("DaredevilH") || textoSegundaFichaSeleccionada.equals("Silver-SurferH") || textoSegundaFichaSeleccionada.equals("HulkH") || textoSegundaFichaSeleccionada.equals("Iron-ManH") || textoSegundaFichaSeleccionada.equals("ThorH") || textoSegundaFichaSeleccionada.equals("Human-TorchH") || textoSegundaFichaSeleccionada.equals("CyclopsH") || textoSegundaFichaSeleccionada.equals("Invisible-womanH") || textoSegundaFichaSeleccionada.equals("Ghost-riderH") || textoSegundaFichaSeleccionada.equals("PunisherH") || textoSegundaFichaSeleccionada.equals("BladeH") || textoSegundaFichaSeleccionada.equals("ThingH") || textoSegundaFichaSeleccionada.equals("Emma-FrostH") || textoSegundaFichaSeleccionada.equals("She-HulkH") || textoSegundaFichaSeleccionada.equals("Giant-ManH") || textoSegundaFichaSeleccionada.equals("BeastH") || textoSegundaFichaSeleccionada.equals("ColosusH") || rangos2Heroes.contains(textoSegundaFichaSeleccionada)) {
                 ganador = textoSegundaFichaSeleccionada;
             }
-            if (textoSegundaFichaSeleccionada.equals("tierraH")) {
+            if (textoSegundaFichaSeleccionada.equals("tierraH")&& esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true) {
                 GananVillanos = true;
             }
         }
-        
-        
+        if (rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)){
+            if(ganador.equals(textoSegundaFichaSeleccionada)){
+                 fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
+                 String tokens=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokens);
+                System.out.println("se elimino:"+eliminadasV);
+             }else 
+                if(ganador.equals(textoPrimeraFichaSeleccionada)){
+               fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
+                String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV); 
+                System.out.println("se elimino:"+eliminadasH);
+            }else 
+               if(ganador.equals("ninguno")){
+                     fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
+                 String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV);
+                System.out.println("se elimino:"+eliminadasV);
+                //ganadores heroes
+               fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
+                String tokens=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokens); 
+                System.out.println("se elimino:"+eliminadasH);
+                }
+        }
+        else if (rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)){
+        if (ganador.equals(textoPrimeraFichaSeleccionada)){
+                 fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
+                 String tokens=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokens);
+                System.out.println("se elimino:"+eliminadasV);
+             }else 
+                if(ganador.equals(textoSegundaFichaSeleccionada)){
+               fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
+                String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV); 
+                System.out.println("se elimino:"+eliminadasH);
+            }else 
+               if(ganador.equals("ninguno")){
+                     fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
+                 String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV);
+                System.out.println("se elimino:"+eliminadasV);
+                //ganadores heroes
+               fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
+                String tokens=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokens); 
+                System.out.println("se elimino:"+eliminadasH);
+                }
+        }
         
         
 
@@ -1135,10 +1194,12 @@ public class Tablero extends JFrame implements ActionListener {
         if (ganador.equals(textoPrimeraFichaSeleccionada) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == true) {
             JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nGana " + textoPrimeraFichaSeleccionada);
             botones[posicionInicialx][posicionInicialy].setText("");
+            
+            asignarColorBotones();
             botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
             asignarColorBotones();
             JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
-            turnoHeroes=!turnoHeroes;
+            turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
             FichasRestantesVillanos--;
@@ -1151,7 +1212,7 @@ public class Tablero extends JFrame implements ActionListener {
 
             asignarColorBotones();
             JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
-            turnoHeroes=!turnoHeroes;
+            turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
             FichasRestantesHeroes--;
@@ -1162,16 +1223,24 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("pumpkin-bomb")) {
                 JOptionPane.showMessageDialog(null, "Te has topado con una bomba!\nTu ficha ha sido destruida.");
                 botones[posicionInicialx][posicionInicialy].setText("");
+                
+                 asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
+                
+                asignarColorBotones();
                 JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
-                turnoHeroes=!turnoHeroes;
+                turnoHeroes = !turnoHeroes;
                 FichasRestantesHeroes--;
             } else {
                 JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nAmbos son eliminados.");
                 botones[posicionInicialx][posicionInicialy].setText("");
+                
+                 asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
+               
+                asignarColorBotones();
                 JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
-                turnoHeroes=!turnoHeroes;
+                turnoHeroes = !turnoHeroes;
                 FichasRestantesHeroes--;
                 FichasRestantesVillanos--;
 
@@ -1189,9 +1258,9 @@ public class Tablero extends JFrame implements ActionListener {
             int deltaY = Math.abs(posicionFinaly - posicionInicialy);
 
             if (deltaX == 0 || deltaY == 0) {
+                System.out.println("Es valido en la primera");
                 return true; // Movimiento horizontal, vertical
             } else {
-                System.out.println("Es invalido en la primera");
                 return false;
             }
         } else {
@@ -1200,13 +1269,14 @@ public class Tablero extends JFrame implements ActionListener {
             int deltaY = Math.abs(posicionFinaly - posicionInicialy);
 
             if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1)) {
+                System.out.println("Es valido en la segunda");
                 return true; // Movimiento horizontal o vertical, una casilla
             } else {
-                System.out.println("Es invalido en la segunda");
                 return false;
             }
         }
     }
+
     private void ponerTextoAlLabelDeTurno() {
         if (turnoHeroes == true) {
             labelTurno.setText("Turno de los heroes");

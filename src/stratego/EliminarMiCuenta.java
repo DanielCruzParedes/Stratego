@@ -152,6 +152,7 @@ public class EliminarMiCuenta extends javax.swing.JFrame {
         if (aux != null) {
             if (aux.getContrasena().equals(contrasena)) {
                 controladorlogin.eliminarCuenta(controladorlogin.UsuarioLogeado);
+                controladorlogin.totalUsuariosActivos--;
                 JOptionPane.showMessageDialog(null, "Cuenta eliminada correctamente.");
                 login.setVisible(true);
                 this.dispose();

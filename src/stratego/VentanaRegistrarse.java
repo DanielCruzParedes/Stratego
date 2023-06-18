@@ -9,14 +9,16 @@ import javax.swing.JOptionPane;
 public class VentanaRegistrarse extends javax.swing.JFrame {
     
     Login login;
+    ControladorLogin controladorlogin;
     /**
      * Creates new form VentanaRegistrarse
      */
-    public VentanaRegistrarse(Login login) {
+    public VentanaRegistrarse(Login login, ControladorLogin controladorlogin) {
         initComponents();
         setLocationRelativeTo(this);
         
         this.login=login;
+        this.controladorlogin=controladorlogin;
         
     }
 
@@ -151,6 +153,8 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
             //Guardar usuario
         boolean respuesta = login.getControlador().agregarUsuario(usuario);
          if(respuesta == true) {
+             controladorlogin.totalUsuariosActivos++;
+             controladorlogin.totalUsuariosHistoricos++;
              JOptionPane.showMessageDialog(null, "Se ha registrado correctamente.");
          }else{
              JOptionPane.showMessageDialog(null, "El usuario ya existe.");

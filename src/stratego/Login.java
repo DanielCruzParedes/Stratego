@@ -10,7 +10,7 @@ public class Login extends javax.swing.JFrame {
     Login login;
     Configuracion configuracion;
     MiPerfil miperfil;
-    UniversoMarvel universomarvel;
+    Ranking universomarvel;
     
     public Login() {
         initComponents();
@@ -92,7 +92,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaButtonActionPerformed
-        VentanaRegistrarse ventanaregistro = new VentanaRegistrarse(this);
+        VentanaRegistrarse ventanaregistro = new VentanaRegistrarse(this, controladorlogin);
         ventanaregistro.setVisible(true);
         this.dispose();
         

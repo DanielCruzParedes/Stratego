@@ -6,14 +6,22 @@ import java.util.ArrayList;
  *
  * @author danie
  */
+
 public class ControladorLogin {
     private String text;
     ControladorLogin controladorlogin;
     ArrayList<Usuario>listaUsuarios;
     public String UsuarioLogeado;
+    public int totalUsuariosActivos;
+    public int totalUsuariosHistoricos;
+    public int partidasJugadasComoHeroes;
+    public int partidasJugadasComoVillanos;
+    public int vecesQueGanaronHeroes;
+    public int vecesQueGanaronVillanos;
     
     public ControladorLogin(){
        listaUsuarios=new ArrayList<>();
+       this.controladorlogin=this;
     }
     
     
@@ -54,6 +62,10 @@ public class ControladorLogin {
             return true;
         }
         return false;
+        
+    }
+    public void agregarPuntosAlUsuario(String nombreUser, int puntosPorAgregar){
+        buscarUsuario(nombreUser);
         
     }
     

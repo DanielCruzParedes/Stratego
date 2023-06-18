@@ -9,7 +9,7 @@ public class StrategoMarvel extends javax.swing.JFrame {
     ControladorLogin controladorlogin;
     Configuracion configuracion;
     MiPerfil miperfil;
-    UniversoMarvel universomarvel;
+    Ranking universomarvel;
     MovimientosDeFichas movimientos;
     
     /**

@@ -1,5 +1,7 @@
 package stratego;
 
+import javax.swing.JOptionPane;
+
 public class MenuPrincipal extends javax.swing.JFrame {
 
     Usuario usuario;
@@ -151,12 +153,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMiPerfilActionPerformed
 
     private void btncerrarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarsesionActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea cerrar sesion?", "", JOptionPane.YES_NO_OPTION);
+        if (respuesta == 0) {
         login.setVisible(true);
         this.dispose();
+            
+        }
     }//GEN-LAST:event_btncerrarsesionActionPerformed
 
     private void btnUniversoMarvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUniversoMarvelActionPerformed
-        UniversoMarvel universomarvel = new UniversoMarvel(login, controladorlogin);
+        UniversoMarvel universomarvel = new UniversoMarvel(controladorlogin, login);
         universomarvel.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnUniversoMarvelActionPerformed

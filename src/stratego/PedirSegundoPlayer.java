@@ -6,16 +6,16 @@ public class PedirSegundoPlayer extends javax.swing.JFrame {
     public String bandoElegido;
     ControladorLogin controladorlogin;
     Login login;
-MenuPrincipal menu;
+MenuPrincipal menuprincipal;
 FichasTableroHeroes controladortablero;
 MovimientosDeFichas movimientos;
    
+public String segundoPlayer;
     public PedirSegundoPlayer(ControladorLogin controladorlogin, Login login, MovimientosDeFichas movimientos) {
         initComponents();
         setLocationRelativeTo(this);
         this.controladorlogin=controladorlogin;
         this.login=login;
-        menu=new MenuPrincipal(login, controladorlogin);
         lblUsuarioLogeado.setText(controladorlogin.UsuarioLogeado);
         
     }
@@ -147,7 +147,7 @@ MovimientosDeFichas movimientos;
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSegundoPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSegundoPlayerActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtSegundoPlayerActionPerformed
 
     private void btnJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJuegoActionPerformed
@@ -162,10 +162,21 @@ MovimientosDeFichas movimientos;
                 JOptionPane.showMessageDialog(null, "El segundo player no puede ser el mismo que el primer player.");
             }else{
             if(user.getUser().equals(segundoplayer)){
+                this.segundoPlayer=segundoplayer;
+                if(this.bandoElegido==null){
+                    JOptionPane.showMessageDialog(null, "Elija el bando con el que desea jugar.");
+                }else{
             Tablero tablero = new Tablero(this, controladorlogin, login);
             this.bandoElegido=Cb_bandos.getSelectedItem().toString();
+            if(this.bandoElegido.equals("HEROES")){
+                controladorlogin.partidasJugadasComoHeroes++;
+            }else{
+                controladorlogin.partidasJugadasComoVillanos++;
+            }
             tablero.setVisible(true);
             this.dispose();
+                    
+                }
                 
             }
                 
@@ -179,7 +190,8 @@ MovimientosDeFichas movimientos;
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        menu.setVisible(true);
+        menuprincipal= new MenuPrincipal(login,controladorlogin);
+        menuprincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 

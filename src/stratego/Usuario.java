@@ -32,7 +32,7 @@ public class Usuario {
         return contrasena;
     }
     public void setPuntos(int puntos){
-        this.puntos=puntos;
+        this.puntos=this.puntos+puntos;
     }
     public int getPuntos(){
         return puntos;
@@ -51,8 +51,6 @@ public class Usuario {
     }
     
     
-
-
 
 
 }
