@@ -233,12 +233,19 @@ public class Tablero extends JFrame implements ActionListener {
                         asignarColorBotones();
                         System.out.println("veces clickeadas: " + vecesClickeadas);
                         if (GananHeroes == true || FichasRestantesVillanos == 0) {
+                            controladorlogin.buscarUsuario(heroes).setPuntos(3);
+                            
                             JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO SALVADA!\nLOS HEROES HAN GANADO!");
-
+                            menuprincipal.setVisible(true);
+                            dispose();
+                            
+                            
                         }
                         if (GananVillanos == true || FichasRestantesHeroes == 0) {
+                            controladorlogin.buscarUsuario(villanos).setPuntos(3);
                             JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO DESTRUIDA!\nLOS VILLANOS HAN GANADO!");
-
+                            menuprincipal.setVisible(true);
+                            dispose();
                         }
 
                     }
