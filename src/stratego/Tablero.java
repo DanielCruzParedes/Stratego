@@ -1151,6 +1151,12 @@ public class Tablero extends JFrame implements ActionListener {
                 System.out.println("se elimino:"+eliminadasH);
             }else 
                if(ganador.equals("ninguno")){
+                   if(textoSegundaFichaSeleccionada.equals("pumpkin-bomb")){
+                     fichaseliminadasV.eliminadas("pumpkin-bomb");
+                 String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV);
+                System.out.println("se elimino porque gano ninguno");  
+                   }
                    if(rangos2Villanos.contains(textoSegundaFichaSeleccionada) || rangossobrantesV.contains(textoSegundaFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
@@ -1192,6 +1198,12 @@ public class Tablero extends JFrame implements ActionListener {
                 System.out.println("se elimino porque gano el heroe");
             }else 
                if(ganador.equals("ninguno")){
+                                      if(textoSegundaFichaSeleccionada.equals("nova-blast")){
+                     fichaseliminadasH.eliminadas("nova-blast");
+                 String tokensH=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokensH);
+                System.out.println("se elimino porque gano ninguno");  
+                   }
                    if(rangos2Villanos.contains(textoSegundaFichaSeleccionada) || rangossobrantesV.contains(textoSegundaFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
