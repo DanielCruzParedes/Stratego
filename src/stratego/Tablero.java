@@ -1136,7 +1136,8 @@ public class Tablero extends JFrame implements ActionListener {
                 GananVillanos = true;
             }
         }
-        if (rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)){
+        //Fichas eliminadas
+        if ((rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true){
             if(ganador.equals(textoSegundaFichaSeleccionada)){
                  fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
                  String tokens=fichaseliminadasH.fichas();
@@ -1150,40 +1151,72 @@ public class Tablero extends JFrame implements ActionListener {
                 System.out.println("se elimino:"+eliminadasH);
             }else 
                if(ganador.equals("ninguno")){
+                   if(rangos2Villanos.contains(textoSegundaFichaSeleccionada) || rangossobrantesV.contains(textoSegundaFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino:"+eliminadasV);
-                //ganadores heroes
+                System.out.println("se elimino porque gano ninguno");
+                   }
+                   if(rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)){
+                     fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
+                 String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV);
+                System.out.println("se elimino porque gano ninguno");
+                   }
+                    if(rangos2Heroes.contains(textoSegundaFichaSeleccionada) || rangossobrantesH.contains(textoSegundaFichaSeleccionada)){
+               fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
+                String tokens=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokens); 
+                System.out.println("se elimino porque gano ninguno");
+                    }if(rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)){
                fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
                 String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens); 
                 System.out.println("se elimino:"+eliminadasH);
+                    }
+                    
+                   
                 }
         }
-        else if (rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)){
+        else if ((rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada)==true){
         if (ganador.equals(textoPrimeraFichaSeleccionada)){
                  fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
                  String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens);
-                System.out.println("se elimino:"+eliminadasV);
+                System.out.println("se elimino porque gano el villano");
              }else 
                 if(ganador.equals(textoSegundaFichaSeleccionada)){
                fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
                 String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV); 
-                System.out.println("se elimino:"+eliminadasH);
+                System.out.println("se elimino porque gano el heroe");
             }else 
                if(ganador.equals("ninguno")){
+                   if(rangos2Villanos.contains(textoSegundaFichaSeleccionada) || rangossobrantesV.contains(textoSegundaFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino:"+eliminadasV);
-                //ganadores heroes
+                System.out.println("se elimino porque gano ninguno");
+                   }
+                   if(rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)){
+                     fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
+                 String tokensV=fichaseliminadasV.fichas();
+                eliminadasV.setText(tokensV);
+                System.out.println("se elimino porque gano ninguno");
+                   }
+                    if(rangos2Heroes.contains(textoSegundaFichaSeleccionada) || rangossobrantesH.contains(textoSegundaFichaSeleccionada)){
+               fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
+                String tokens=fichaseliminadasH.fichas();
+                eliminadasH.setText(tokens); 
+                System.out.println("se elimino porque gano ninguno");
+                    }if(rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)){
                fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
                 String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens); 
-                System.out.println("se elimino:"+eliminadasH);
+                System.out.println("se elimino porque gano ninguno");
+                    }
+                   
+                     
                 }
         }
         
