@@ -17,6 +17,11 @@ public String segundoPlayer;
         this.controladorlogin=controladorlogin;
         this.login=login;
         lblUsuarioLogeado.setText(controladorlogin.UsuarioLogeado);
+        if(controladorlogin.listaUsuarios.size()<2){
+            btnJuego.setEnabled(false);
+        }else{
+            btnJuego.setEnabled(true);
+        }
         
     }
    

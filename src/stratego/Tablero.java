@@ -275,11 +275,16 @@ public class Tablero extends JFrame implements ActionListener {
                                 controladorlogin.logs = villanos + " USANDO VILLANOS HA PERDIDO POR NO TENER MOVIMIENTOS VALIDOS DISPONIBLES ANTE " + heroes + " - 19/6/2023";
                                 controladorlogin.buscarUsuario(heroes).setPuntos(3);
                                 controladorlogin.vecesQueGanaronHeroes++;
+                                cambio.dispose();
+                                menuprincipal.setVisible(true);
+                                dispose();
+                                
                             } else {
                                 controladorlogin.buscarUsuario(heroes).setPuntos(3);
                                 controladorlogin.vecesQueGanaronHeroes++;
                                 controladorlogin.logs = heroes + "USANDO LOS HEROES HA SALVADO LA TIERRA! VENCIENDO A " + villanos + " - 19/6/2023\n" + controladorlogin.logs;
                                 JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO SALVADA!\nLOS HEROES HAN GANADO!");
+                                cambio.dispose();
                                 menuprincipal.setVisible(true);
                                 dispose();
 
@@ -291,11 +296,15 @@ public class Tablero extends JFrame implements ActionListener {
                                 controladorlogin.logs = heroes + " USANDO HEROES HA PERDIDO POR NO TENER MOVIMIENTOS VALIDOS DISPONIBLES ANTE " + villanos + " - 19/6/2023";
                                 controladorlogin.buscarUsuario(villanos).setPuntos(3);
                                 controladorlogin.vecesQueGanaronVillanos++;
+                                cambio.dispose();
+                                menuprincipal.setVisible(true);
+                                dispose();
                             } else {
                                 controladorlogin.buscarUsuario(villanos).setPuntos(3);
                                 controladorlogin.vecesQueGanaronVillanos++;
                                 controladorlogin.logs = villanos + "USANDO LOS VILLANOS HA CAPTURADO LA TIERRA! VENCIENDO A " + heroes + " - 19/6/2023\n" + controladorlogin.logs;
                                 JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO CAPTURADA!\nLOS VILLANOS HAN GANADO!");
+                                cambio.dispose();
                                 menuprincipal.setVisible(true);
                                 dispose();
 
@@ -488,7 +497,7 @@ public class Tablero extends JFrame implements ActionListener {
                 Color colorZonaProhibidaDerecha = new Color(121, 9, 167);
                 if (!botones[fila][columna].getBackground().equals(Color.YELLOW) && !botones[fila][columna].getBackground().equals(colorZonaProhibidaDerecha)) {
                     String textoBoton = boton.getText();
-                    Color colorHeroes = new Color(17, 133, 6);
+                    Color colorHeroes = new Color(9, 89, 167);
                     Color colorVillanos = new Color(167, 9, 9);
                     if (textoBoton.equals("")) {
                         boton.setBackground(Color.WHITE);
