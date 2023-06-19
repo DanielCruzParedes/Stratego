@@ -2,24 +2,32 @@
 package stratego;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import stratego.Usuario.UsuarioComparator;
 
 public class Ranking extends javax.swing.JFrame {
     Login login;
     ControladorLogin controladorlogin;
     private int puntos=0,posicion=0;
+        UsuarioComparator usuarioComparator = new UsuarioComparator();
     public Ranking(Login login, ControladorLogin controladorlogin) {
         
         initComponents();
         setLocationRelativeTo(null);
         this.login=login;
         this.controladorlogin=controladorlogin;
-       
-        
+
+
+        // Ordenar la lista de usuarios utilizando el UsuarioComparator
+        Collections.sort(controladorlogin.listaUsuarios, usuarioComparator);
+
+        // Construir el texto del ranking
         String texto = "";
-        for (Usuario usuario : controladorlogin.listaUsuarios) {
-            texto += posicion+"\t"+usuario.getUser()+"\t"+usuario.getPuntos()+ "\n";
+        for (int i = 0; i < controladorlogin.listaUsuarios.size(); i++) {
+            Usuario usuario = controladorlogin.listaUsuarios.get(i);
+            texto += (i + 1) + "\t" + usuario.getUser() + "\t" + usuario.getPuntos() + "\n";
         }
-        
+        Area_texto.setEditable(false);
         Area_texto.setText(texto);
     
     }

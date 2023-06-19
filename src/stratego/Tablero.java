@@ -56,20 +56,29 @@ public class Tablero extends JFrame implements ActionListener {
     ArrayList<String> rangos2Villanos = new ArrayList();
     ArrayList<String> rangossobrantesH = new ArrayList();
     ArrayList<String> rangossobrantesV = new ArrayList();
+    //Crear los JLabel para mostrar los datos de la ficha
+        JLabel lblrango = new JLabel("Rango");
+        JLabel lblidentidad = new JLabel("Identidad");
 
     public Tablero(PedirSegundoPlayer pedirsegundoplayer, ControladorLogin controladorlogin, Login login) {
         this.controladorlogin = controladorlogin;
         this.login = login;
         this.pedirsegundoplayer = pedirsegundoplayer;
         this.menuprincipal = new MenuPrincipal(login, controladorlogin);
+        fichaseliminadasH.fichas.clear();
+        fichaseliminadasV.fichas.clear();
         if (pedirsegundoplayer.bandoElegido.equals("HEROES")) {
             turnoHeroes = true;
             heroes = controladorlogin.UsuarioLogeado;
             villanos = pedirsegundoplayer.segundoPlayer;
+            controladorlogin.buscarUsuario(heroes).setVecesJugadasHeroes(1);
+            controladorlogin.buscarUsuario(villanos).setVecesJugadasVillanos(1);
         } else if (pedirsegundoplayer.bandoElegido.equals("VILLANOS")) {
             turnoHeroes = false;
             heroes = pedirsegundoplayer.segundoPlayer;
             villanos = controladorlogin.UsuarioLogeado;
+            controladorlogin.buscarUsuario(heroes).setVecesJugadasHeroes(1);
+            controladorlogin.buscarUsuario(villanos).setVecesJugadasVillanos(1);
         }
 
         //Rangos 2 Heroes
@@ -157,7 +166,29 @@ public class Tablero extends JFrame implements ActionListener {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         Color fondoMainPanel = new Color(12, 81, 109);
         mainPanel.setBackground(fondoMainPanel);
+        
+        
+        lblrango.setFont(Arial);
+        lblidentidad.setFont(Arial);
+        
+        
+        // Establecer las restricciones para la primer jlabel
+        GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.anchor = GridBagConstraints.NORTHWEST; // Anclar en la esquina superior izquierda
+        gbc1.insets = new Insets(10, 10, 0, 0); // Márgenes internos de la etiqueta
+        gbc1.gridx = 3; // Posición en la cuadrícula X
+        gbc1.gridy = 0; // Posición en la cuadrícula Y
+        
+         // Establecer las restricciones para la segunda etiqueta
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.anchor = GridBagConstraints.NORTHWEST; // Anclar en la esquina superior izquierda
+        gbc2.insets = new Insets(10, 10, 0, 0); // Márgenes internos de la etiqueta
+        gbc2.gridx = 1; // Posición en la cuadrícula X
+        gbc2.gridy = 0; // Posición en la cuadrícula Y
 
+        // Agregar las etiquetas al panel principal con las restricciones
+        mainPanel.add(lblrango, gbc1);
+        mainPanel.add(lblidentidad, gbc2);
         // Crear el JPanel adicional
         JPanel panelAdicional = new JPanel();
         panelAdicional.setBackground(Color.black);
@@ -229,23 +260,41 @@ public class Tablero extends JFrame implements ActionListener {
                         int x = (int) botonClickeado.getClientProperty("x");
                         int y = (int) botonClickeado.getClientProperty("y");
                         System.out.println(String.valueOf(x + ", " + y));
+                        rangos2Heroes.contains(textoPrimeraFichaSeleccionada);
                         hacerMovimientoYTurnos(boton, botonClickeado);
                         asignarColorBotones();
                         System.out.println("veces clickeadas: " + vecesClickeadas);
                         if (GananHeroes == true || FichasRestantesVillanos == 0) {
+                            if(FichasRestantesVillanos == 0){
+                                controladorlogin.logs=villanos+" USANDO VILLANOS HA PERDIDO POR NO TENER MOVIMIENTOS VALIDOS DISPONIBLES ANTE "+heroes+" - 19/6/2023";
+                                controladorlogin.buscarUsuario(heroes).setPuntos(3);
+                            controladorlogin.vecesQueGanaronHeroes++;
+                            }else{
                             controladorlogin.buscarUsuario(heroes).setPuntos(3);
-                            
+                            controladorlogin.vecesQueGanaronHeroes++;
+                            controladorlogin.logs=heroes+ "USANDO LOS HEROES HA SALVADO LA TIERRA! VENCIENDO A "+villanos+" - 19/6/2023\n"+controladorlogin.logs;
                             JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO SALVADA!\nLOS HEROES HAN GANADO!");
                             menuprincipal.setVisible(true);
                             dispose();
+                                
+                            }
                             
                             
                         }
                         if (GananVillanos == true || FichasRestantesHeroes == 0) {
+                            if(FichasRestantesHeroes == 0){
+                                controladorlogin.logs=heroes+" USANDO HEROES HA PERDIDO POR NO TENER MOVIMIENTOS VALIDOS DISPONIBLES ANTE "+villanos+" - 19/6/2023";
+                                controladorlogin.buscarUsuario(villanos).setPuntos(3);
+                            controladorlogin.vecesQueGanaronVillanos++;
+                            }else{
                             controladorlogin.buscarUsuario(villanos).setPuntos(3);
-                            JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO DESTRUIDA!\nLOS VILLANOS HAN GANADO!");
+                            controladorlogin.vecesQueGanaronVillanos++;
+                            controladorlogin.logs=villanos+ "USANDO LOS VILLANOS HA CAPTURADO LA TIERRA! VENCIENDO A "+heroes+" - 19/6/2023\n"+controladorlogin.logs;
+                            JOptionPane.showMessageDialog(null, "LA TIERRA HA SIDO CAPTURADA!\nLOS VILLANOS HAN GANADO!");
                             menuprincipal.setVisible(true);
                             dispose();
+                                
+                            }
                         }
 
                     }
@@ -293,6 +342,50 @@ public class Tablero extends JFrame implements ActionListener {
         
     }
 
+    
+    private void ponerIdentidadYRango(){
+        //Para turno heroes
+        if(turnoHeroes==true){
+        if(rangos2Heroes.contains(textoPrimeraFichaSeleccionada)){
+           lblrango.setText("2");
+        }
+        if (textoPrimeraFichaSeleccionada.equals("Mr-FantasticH")) {
+            lblrango.setText("10");
+        }
+        if (textoPrimeraFichaSeleccionada.equals("Capitan-AmericaH")) {
+        lblrango.setText("9");
+        }       
+        if ((textoPrimeraFichaSeleccionada.equals("ProfesorXH") || textoPrimeraFichaSeleccionada.equals("Nick-FuryH"))) {
+            lblrango.setText("8");
+        }
+        if ((textoPrimeraFichaSeleccionada.equals("SpidermanH") || textoPrimeraFichaSeleccionada.equals("WolverineH") || textoPrimeraFichaSeleccionada.equals("NamorH"))) {
+            lblrango.setText("7");
+        }
+        if ((textoPrimeraFichaSeleccionada.equals("DaredevilH") || textoPrimeraFichaSeleccionada.equals("Silver-SurferH") || textoPrimeraFichaSeleccionada.equals("HulkH") || textoPrimeraFichaSeleccionada.equals("Iron-ManH"))) {
+            lblrango.setText("6");
+        }
+        if ((textoPrimeraFichaSeleccionada.equals("ThorH") || textoPrimeraFichaSeleccionada.equals("Human-TorchH") || textoPrimeraFichaSeleccionada.equals("CyclopsH") || textoPrimeraFichaSeleccionada.equals("Invisible-womanH"))) {
+            lblrango.setText("5");
+        }
+        if ((textoPrimeraFichaSeleccionada.equals("Ghost-riderH") || textoPrimeraFichaSeleccionada.equals("PunisherH") || textoPrimeraFichaSeleccionada.equals("BladeH") || textoPrimeraFichaSeleccionada.equals("ThingH"))) {
+            lblrango.setText("4");
+        }
+        if ((textoPrimeraFichaSeleccionada.equals("Emma-FrostH") || textoPrimeraFichaSeleccionada.equals("She-HulkH") || textoPrimeraFichaSeleccionada.equals("Giant-ManH") || textoPrimeraFichaSeleccionada.equals("BeastH") || textoPrimeraFichaSeleccionada.equals("ColossusH"))) {
+            lblrango.setText("3");
+        }
+        if (textoPrimeraFichaSeleccionada.equals("BlackWidowH")) {
+            lblrango.setText("1");
+        }
+        }
+        
+        
+        
+        
+        String nombreFicha = textoPrimeraFichaSeleccionada;
+String fichaSinUltimaLetra = nombreFicha.substring(0, textoPrimeraFichaSeleccionada.length() - 1);
+        lblidentidad.setText(fichaSinUltimaLetra);
+        
+    }
     private void asignarColorBotones() {
         for (int fila = 0; fila < 10; fila++) {
             for (int columna = 0; columna < 10; columna++) {
@@ -340,6 +433,18 @@ public class Tablero extends JFrame implements ActionListener {
         if (e.getSource() == Bt_rendirse) {
             int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea rendirse?", "", JOptionPane.YES_NO_OPTION);
             if (respuesta == 0) {
+                if(turnoHeroes==true){
+                    controladorlogin.buscarUsuario(villanos).setPuntos(3);
+                            controladorlogin.vecesQueGanaronVillanos++;
+                            controladorlogin.logs=villanos+" USANDO VILLANOS HA GANADO YA QUE "+heroes+" USANDO HEROES SE HA RETIRADO DEL JUEGO - 19/6/2023\n"+controladorlogin.logs;
+                            JOptionPane.showMessageDialog(null, "LOS HEROES SE HAN RENDIDO!\nLOS VILLANOS HAN GANADO!");
+                }
+                if(turnoHeroes==false){
+                    controladorlogin.buscarUsuario(heroes).setPuntos(3);
+                            controladorlogin.vecesQueGanaronHeroes++;
+                            controladorlogin.logs=heroes+" USANDO HEROES HA GANADO YA QUE "+villanos+" USANDO VILLANOS SE HA RETIRADO DEL JUEGO - 19/6/2023\n"+controladorlogin.logs;
+                            JOptionPane.showMessageDialog(null, "LOS VILLANOS SE HAN RENDIDO!\nLOS HEROES HAN GANADO!");
+                }
                 
                 menuprincipal.setVisible(true);
                 this.dispose();
@@ -351,22 +456,30 @@ public class Tablero extends JFrame implements ActionListener {
         //Zona prohibida lado izquierdo
         botones[4][2].setEnabled(false);
         botones[4][2].setBackground(Color.YELLOW);
+        botones[4][2].setText(".");
         botones[4][3].setEnabled(false);
         botones[4][3].setBackground(Color.YELLOW);
+        botones[4][3].setText(".");
         botones[5][2].setEnabled(false);
         botones[5][2].setBackground(Color.YELLOW);
+        botones[5][2].setText(".");
         botones[5][3].setEnabled(false);
         botones[5][3].setBackground(Color.YELLOW);
+        botones[5][3].setText(".");
         Color colorZonaProhibidaDerecha = new Color(121, 9, 167);
         //Zona prohibida lado derecho
         botones[4][6].setEnabled(false);
         botones[4][6].setBackground(colorZonaProhibidaDerecha);
+        botones[4][6].setText(".");
         botones[4][7].setEnabled(false);
         botones[4][7].setBackground(colorZonaProhibidaDerecha);
+        botones[4][7].setText(".");
         botones[5][6].setEnabled(false);
         botones[5][6].setBackground(colorZonaProhibidaDerecha);
+        botones[5][6].setText(".");
         botones[5][7].setEnabled(false);
         botones[5][7].setBackground(colorZonaProhibidaDerecha);
+        botones[5][7].setText(".");
 
     }
 
@@ -1149,43 +1262,44 @@ public class Tablero extends JFrame implements ActionListener {
                  fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
                  String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens);
-                System.out.println("se elimino:"+eliminadasV);
+                FichasRestantesHeroes--;
              }else 
                 if(ganador.equals(textoPrimeraFichaSeleccionada)){
                fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                 String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV); 
-                System.out.println("se elimino:"+eliminadasH);
+                FichasRestantesVillanos--;
             }else 
                if(ganador.equals("ninguno")){
                    if(textoSegundaFichaSeleccionada.equals("pumpkin-bomb")){
                      fichaseliminadasV.eliminadas("pumpkin-bomb");
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino porque gano ninguno");  
                    }
                    if(rangos2Villanos.contains(textoSegundaFichaSeleccionada) || rangossobrantesV.contains(textoSegundaFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesVillanos--;
+                
+                
                    }
                    if(rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesVillanos--;
                    }
                     if(rangos2Heroes.contains(textoSegundaFichaSeleccionada) || rangossobrantesH.contains(textoSegundaFichaSeleccionada)){
                fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
                 String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens); 
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesHeroes--;
                     }if(rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)){
                fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
                 String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens); 
-                System.out.println("se elimino:"+eliminadasH);
+                FichasRestantesHeroes--;
                     }
                     
                    
@@ -1196,46 +1310,44 @@ public class Tablero extends JFrame implements ActionListener {
                  fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
                  String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens);
-                System.out.println("se elimino porque gano el villano");
+                FichasRestantesHeroes--;
              }else 
                 if(ganador.equals(textoSegundaFichaSeleccionada)){
                fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
                 String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV); 
-                System.out.println("se elimino porque gano el heroe");
+                FichasRestantesVillanos--;
             }else 
                if(ganador.equals("ninguno")){
                                       if(textoSegundaFichaSeleccionada.equals("nova-blast")){
                      fichaseliminadasH.eliminadas("nova-blast");
                  String tokensH=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokensH);
-                System.out.println("se elimino porque gano ninguno");  
+                FichasRestantesVillanos--;
                    }
                    if(rangos2Villanos.contains(textoSegundaFichaSeleccionada) || rangossobrantesV.contains(textoSegundaFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoSegundaFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesVillanos--;
                    }
                    if(rangos2Villanos.contains(textoPrimeraFichaSeleccionada) || rangossobrantesV.contains(textoPrimeraFichaSeleccionada)){
                      fichaseliminadasV.eliminadas(textoPrimeraFichaSeleccionada);
                  String tokensV=fichaseliminadasV.fichas();
                 eliminadasV.setText(tokensV);
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesVillanos--;
                    }
                     if(rangos2Heroes.contains(textoSegundaFichaSeleccionada) || rangossobrantesH.contains(textoSegundaFichaSeleccionada)){
                fichaseliminadasH.eliminadas(textoSegundaFichaSeleccionada);
                 String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens); 
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesHeroes--;
                     }if(rangos2Heroes.contains(textoPrimeraFichaSeleccionada) || rangossobrantesH.contains(textoPrimeraFichaSeleccionada)){
                fichaseliminadasH.eliminadas(textoPrimeraFichaSeleccionada);
                 String tokens=fichaseliminadasH.fichas();
                 eliminadasH.setText(tokens); 
-                System.out.println("se elimino porque gano ninguno");
+                FichasRestantesHeroes--;
                     }
-                   
-                     
                 }
         }
         
@@ -1254,7 +1366,6 @@ public class Tablero extends JFrame implements ActionListener {
             turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
-            FichasRestantesVillanos--;
         }
         //Si el ganador es de los villanos
         if (ganador.equals(textoSegundaFichaSeleccionada) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == true) {
@@ -1267,7 +1378,6 @@ public class Tablero extends JFrame implements ActionListener {
             turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
-            FichasRestantesHeroes--;
         }
 
         //Si ambos son del mismo rango o pelea con una bomba
@@ -1282,7 +1392,6 @@ public class Tablero extends JFrame implements ActionListener {
                 asignarColorBotones();
                 JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
                 turnoHeroes = !turnoHeroes;
-                FichasRestantesHeroes--;
             } else {
                 JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nAmbos son eliminados.");
                 botones[posicionInicialx][posicionInicialy].setText("");
@@ -1293,41 +1402,59 @@ public class Tablero extends JFrame implements ActionListener {
                 asignarColorBotones();
                 JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
                 turnoHeroes = !turnoHeroes;
-                FichasRestantesHeroes--;
-                FichasRestantesVillanos--;
 
             }
         }
-
+        System.out.println("Fichas restantes heroes: "+FichasRestantesHeroes);
+        System.out.println("Fichas restantes villanos: "+FichasRestantesVillanos);
     }
 
-    private boolean esMovimientoValido(int posicionInicialx, int posicionInicialy, int posicionFinalx, int posicionFinaly, String fichaseleccionada) {
+   private boolean esMovimientoValido(int posicionInicialx, int posicionInicialy, int posicionFinalx, int posicionFinaly, String fichaSeleccionada) {
+    // Verificar si el movimiento es en línea recta en vertical u horizontal
+    if (rangos2Heroes.contains(fichaSeleccionada) || rangos2Villanos.contains(fichaSeleccionada)) {
+        int deltaX = Math.abs(posicionFinalx - posicionInicialx);
+        int deltaY = Math.abs(posicionFinaly - posicionInicialy);
 
-        // Verificar si el movimiento es en línea recta en vertical o en horizontal
-        if (rangos2Heroes.contains(fichaseleccionada) || rangos2Villanos.contains(fichaseleccionada)) {
-            // Fichas de rango 2: Movimiento horizontal, vertical y diagonal en cualquier dirección
-            int deltaX = Math.abs(posicionFinalx - posicionInicialx);
-            int deltaY = Math.abs(posicionFinaly - posicionInicialy);
-
-            if (deltaX == 0 || deltaY == 0) {
-                System.out.println("Es valido en la primera");
-                return true; // Movimiento horizontal, vertical
-            } else {
-                return false;
-            }
+        if (deltaX == 0 || deltaY == 0) {
+            // Movimiento horizontal o vertical
+            return !hayFichasEnElCamino(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly);
         } else {
-            // Fichas de otros rangos: Movimiento horizontal o vertical, solo una casilla
-            int deltaX = Math.abs(posicionFinalx - posicionInicialx);
-            int deltaY = Math.abs(posicionFinaly - posicionInicialy);
+            return false;
+        }
+    } else {
+        // Movimiento de una casilla en cualquier dirección (sin saltar fichas)
+        int deltaX = Math.abs(posicionFinalx - posicionInicialx);
+        int deltaY = Math.abs(posicionFinaly - posicionInicialy);
 
-            if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1)) {
-                System.out.println("Es valido en la segunda");
-                return true; // Movimiento horizontal o vertical, una casilla
-            } else {
-                return false;
-            }
+        if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1)) {
+            // Movimiento horizontal o vertical de una casilla
+            return true;
+        } else {
+            return false;
         }
     }
+}
+
+private boolean hayFichasEnElCamino(int posicionInicialx, int posicionInicialy, int posicionFinalx, int posicionFinaly) {
+    int deltaX = (int) Math.signum(posicionFinalx - posicionInicialx);
+    int deltaY = (int) Math.signum(posicionFinaly - posicionInicialy);
+
+    int x = posicionInicialx + deltaX;
+    int y = posicionInicialy + deltaY;
+
+    while (x != posicionFinalx || y != posicionFinaly) {
+        if (!botones[x][y].getText().equals("")) {
+            return true; // Hay una ficha en el camino
+        }
+        x += deltaX;
+        y += deltaY;
+    }
+
+    return false; // No hay fichas en el camino
+}
+
+
+
 
     private void ponerTextoAlLabelDeTurno() {
         if (turnoHeroes == true) {

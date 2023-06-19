@@ -18,6 +18,7 @@ public class ControladorLogin {
     public int partidasJugadasComoVillanos;
     public int vecesQueGanaronHeroes;
     public int vecesQueGanaronVillanos;
+    public String logs="";
     
     public ControladorLogin(){
        listaUsuarios=new ArrayList<>();

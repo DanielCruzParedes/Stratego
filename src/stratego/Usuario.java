@@ -1,4 +1,5 @@
 package stratego;
+    import java.util.Comparator;
 
 public class Usuario {
     
@@ -16,6 +17,14 @@ public class Usuario {
         this.vecesJugadasHeroes=vecesJugadasHeroes;
         this.vecesJugadasVillanos=vecesJugadasVillanos;
     }
+
+ public static class UsuarioComparator implements Comparator<Usuario> {
+        @Override
+        public int compare(Usuario usuario1, Usuario usuario2) {
+            return Integer.compare(usuario2.getPuntos(), usuario1.getPuntos());
+        }
+    }
+
     
     public void setUser(String user){
     this.user=user;
@@ -38,13 +47,14 @@ public class Usuario {
         return puntos;
     }
     public void setVecesJugadasHeroes(int vecesJugadasHeroes){
-        this.vecesJugadasHeroes=vecesJugadasHeroes;
+        this.vecesJugadasHeroes=this.vecesJugadasHeroes+vecesJugadasHeroes;
     }
     public int getVecesJugadasHeroes(){
         return vecesJugadasHeroes;
     }
     public void setVecesJugadasVillanos(int vecesJugadasVillanos){
-        this.vecesJugadasVillanos=vecesJugadasVillanos;
+        this.vecesJugadasVillanos=this.vecesJugadasVillanos+vecesJugadasVillanos;
+        
     }
     public int getVecesJugadasVillanos(){
         return vecesJugadasVillanos;
