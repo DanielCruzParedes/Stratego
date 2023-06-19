@@ -7,11 +7,9 @@ public class PedirSegundoPlayer extends javax.swing.JFrame {
     ControladorLogin controladorlogin;
     Login login;
 MenuPrincipal menuprincipal;
-FichasTableroHeroes controladortablero;
-MovimientosDeFichas movimientos;
    
 public String segundoPlayer;
-    public PedirSegundoPlayer(ControladorLogin controladorlogin, Login login, MovimientosDeFichas movimientos) {
+    public PedirSegundoPlayer(ControladorLogin controladorlogin, Login login) {
         initComponents();
         setLocationRelativeTo(this);
         this.controladorlogin=controladorlogin;

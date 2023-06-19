@@ -10,7 +10,6 @@ public class StrategoMarvel extends javax.swing.JFrame {
     Configuracion configuracion;
     MiPerfil miperfil;
     Ranking universomarvel;
-    MovimientosDeFichas movimientos;
     
     /**
      * Creates new form StrategoMarvel
@@ -98,7 +97,7 @@ public class StrategoMarvel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnregresarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PedirSegundoPlayer pedirsegundoplayer = new PedirSegundoPlayer(controladorlogin, login, movimientos);
+        PedirSegundoPlayer pedirsegundoplayer = new PedirSegundoPlayer(controladorlogin, login);
         pedirsegundoplayer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

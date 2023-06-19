@@ -35,6 +35,7 @@ public class Tablero extends JFrame implements ActionListener {
     JLabel labelTurno = new JLabel("Texto del JLabel");
     JTextArea eliminadasH = new JTextArea();
     JTextArea eliminadasV = new JTextArea();
+    
 
     //Para los movimientos
     private String textoPrimeraFichaSeleccionada;
@@ -164,6 +165,8 @@ public class Tablero extends JFrame implements ActionListener {
         setResizable(false);
 
         Font Arial = new Font("Arial", Font.BOLD, 18);
+        Font ArialParaLosTextAreas = new Font("Arial", Font.BOLD, 15);
+        
         botones = new JButton[10][10];
 
         // Crear el contenedor principal (JPanel) con GridBagLayout
@@ -204,14 +207,15 @@ public class Tablero extends JFrame implements ActionListener {
         //Area de texto para fichas heroes
         JLabel fichasvencidasH = new JLabel("FICHAS ELIMINADAS HEROES");
         fichasvencidasH.setFont(Arial);
-        fichasvencidasH.setBounds(1250, 100, 500, 25);
+        fichasvencidasH.setBounds(1250, 50, 500, 125);
         fichasvencidasH.setForeground(Color.WHITE);
         add(fichasvencidasH);
         Color colorarea = new Color(0, 0, 102);
-        eliminadasH.setFont(Arial);
+        eliminadasH.setFont(ArialParaLosTextAreas);
         eliminadasH.setForeground(Color.WHITE);
         eliminadasH.setLayout(null);
-        eliminadasH.setBounds(1280, 140, 240, 600);
+        eliminadasH.setBounds(1280, 140, 240, 700);
+        eliminadasH.setEditable(false);
 
         add(eliminadasH);
         eliminadasH.setBackground(colorarea);
@@ -222,10 +226,10 @@ public class Tablero extends JFrame implements ActionListener {
         fichasvencidasV.setBounds(20, 100, 500, 25);
         fichasvencidasV.setForeground(Color.WHITE);
         add(fichasvencidasV);
-        eliminadasV.setFont(Arial);
+        eliminadasV.setFont(ArialParaLosTextAreas);
         eliminadasV.setForeground(Color.WHITE);
         eliminadasV.setLayout(null);
-        eliminadasV.setBounds(20, 140, 240, 600);
+        eliminadasV.setBounds(20, 140, 240, 700);
         eliminadasV.setEditable(false);
 
         add(eliminadasV);
