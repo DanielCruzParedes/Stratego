@@ -26,7 +26,7 @@ public class Tablero extends JFrame implements ActionListener {
     Login login;
     PedirSegundoPlayer pedirsegundoplayer;
     MenuPrincipal menuprincipal;
-
+    cambioturno cambio=new cambioturno( pedirsegundoplayer,controladorlogin,login);
     public boolean turnoHeroes;
 
     private JButton Bt_rendirse;
@@ -1092,7 +1092,8 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
                     moverimagen();
-                    JOptionPane.showMessageDialog(null, "Hiciste un movimiento! Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
+                    cambio.setVisible(true);
+                this.dispose();
                     turnoHeroes = true;
 
                     ponerTextoAlLabelDeTurno();
@@ -1511,7 +1512,8 @@ public class Tablero extends JFrame implements ActionListener {
             botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
             moverimagen();
             asignarColorBotones();
-            JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
+            cambio.setVisible(true);
+                this.dispose();
             turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
@@ -1523,7 +1525,8 @@ public class Tablero extends JFrame implements ActionListener {
             botones[posicionFinalx][posicionFinaly].setText(textoSegundaFichaSeleccionada);
 
             asignarColorBotones();
-            JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
+            cambio.setVisible(true);
+                this.dispose();
             turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
@@ -1539,7 +1542,8 @@ public class Tablero extends JFrame implements ActionListener {
                 botones[posicionFinalx][posicionFinaly].setText("");
 
                 asignarColorBotones();
-                JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
+                cambio.setVisible(true);
+                this.dispose();
                 turnoHeroes = !turnoHeroes;
             } else {
                 JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nAmbos son eliminados.");
@@ -1549,7 +1553,8 @@ public class Tablero extends JFrame implements ActionListener {
                 botones[posicionFinalx][posicionFinaly].setText("");
                 moverimagen();
                 asignarColorBotones();
-                JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
+                cambio.setVisible(true);
+                this.dispose();
                 turnoHeroes = !turnoHeroes;
 
             }
