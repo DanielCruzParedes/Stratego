@@ -439,29 +439,53 @@ private void moverimagen(){
       String textoBoton = boton.getText();
 
             if(pedirsegundoplayer.bandoElegido.equals("HEROES")){
+                if(turnoHeroes==true){
             if (textoBoton.equals("")) {
                 imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondoblanco.png"));
-            } 
+              } 
                if (rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton) || textoBoton.equals("pumpkin-bomb") ||textoBoton.equals("tierraV")) {
                 imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondovillanos.png"));
-            }    
-               if(turnoHeroes==true){
-                if(rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton)) {
-                boton.setIcon(null);
-                
+              }   
                 }
+                if(turnoHeroes==false){
+                if (textoBoton.equals("")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondoblanco.png"));
+            } 
+               if (rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton) || textoBoton.equals("nova-blast") || textoBoton.equals("tierraH")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/Heroes/fondoheroes.jpg"));  
+            }
+               boton.setIcon(null);
+              
+                }
+               if(turnoHeroes==true){
+                if(rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton) || textoBoton.equals("nova-blast") || textoBoton.equals("tierraH")) {
+                boton.setIcon(null);
+                }
+              
                 }
             }
-            else
-                if(pedirsegundoplayer.bandoElegido.equals("VILLANOS")){
+            
+            //bandi villanos
+              if(pedirsegundoplayer.bandoElegido.equals("VILLANOS")){
+                  if(turnoHeroes==false){
               if (textoBoton.equals("")) {
                 imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondoblanco.png"));
             } 
                if (rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton) || textoBoton.equals("nova-blast") || textoBoton.equals("tierraH")) {
                 imagen = new ImageIcon(getClass().getResource("/imagenes/Heroes/fondoheroes.jpg"));
-            }            
+            }  
+                  }
+                  if(turnoHeroes==true){
+                   if (textoBoton.equals("")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondoblanco.png"));
+                    }
+                   if (rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton) || textoBoton.equals("pumpkin-bomb") ||textoBoton.equals("tierraV")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondovillanos.png"));
+              } 
+                  boton.setIcon(null); 
+                  }
                 if(turnoHeroes==false){
-                if(rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton)) {
+                if(rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton)|| textoBoton.equals("pumpkin-bomb") ||textoBoton.equals("tierraV")) {
                 boton.setIcon(null);
                 }
                 }
