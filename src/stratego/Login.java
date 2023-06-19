@@ -51,7 +51,6 @@ public class Login extends javax.swing.JFrame {
 
         usuarioTextField.setBackground(new java.awt.Color(0, 0, 0));
         usuarioTextField.setForeground(new java.awt.Color(204, 204, 204));
-        usuarioTextField.setText("ejem.usuario123");
         usuarioTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuarioTextFieldActionPerformed(evt);
@@ -83,7 +82,6 @@ public class Login extends javax.swing.JFrame {
 
         contrasenaPasswordField.setBackground(new java.awt.Color(0, 0, 0));
         contrasenaPasswordField.setForeground(new java.awt.Color(204, 204, 204));
-        contrasenaPasswordField.setText("ejem.usuario123");
         jPanel1.add(contrasenaPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 278, 244, 40));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 3, 28)); // NOI18N
