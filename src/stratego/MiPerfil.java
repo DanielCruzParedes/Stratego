@@ -2,10 +2,6 @@ package stratego;
 
 import java.awt.Font;
 
-/**
- *
- * @author danie
- */
 public class MiPerfil extends javax.swing.JFrame {
     Login login;
     ControladorLogin controladorlogin=new ControladorLogin();

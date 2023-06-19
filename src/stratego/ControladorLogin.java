@@ -2,10 +2,6 @@ package stratego;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author danie
- */
 
 public class ControladorLogin {
     private String text;

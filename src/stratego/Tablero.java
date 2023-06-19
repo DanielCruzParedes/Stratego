@@ -35,7 +35,6 @@ public class Tablero extends JFrame implements ActionListener {
     JLabel labelTurno = new JLabel("Texto del JLabel");
     JTextArea eliminadasH = new JTextArea();
     JTextArea eliminadasV = new JTextArea();
-    
 
     //Para los movimientos
     private String textoPrimeraFichaSeleccionada;
@@ -63,14 +62,13 @@ public class Tablero extends JFrame implements ActionListener {
     //Crear los JLabel para mostrar los datos de la ficha
     JLabel lblrango = new JLabel("Rango");
     JLabel lblidentidad = new JLabel("Identidad");
-    
 
     public Tablero(PedirSegundoPlayer pedirsegundoplayer, ControladorLogin controladorlogin, Login login) {
         this.controladorlogin = controladorlogin;
         this.login = login;
         this.pedirsegundoplayer = pedirsegundoplayer;
         this.menuprincipal = new MenuPrincipal(login, controladorlogin);
-        this.configuracion=new Configuracion(login, controladorlogin);
+        this.configuracion = new Configuracion(login, controladorlogin);
         fichaseliminadasH.fichas.clear();
         fichaseliminadasV.fichas.clear();
         if (pedirsegundoplayer.bandoElegido.equals("HEROES")) {
@@ -166,10 +164,10 @@ public class Tablero extends JFrame implements ActionListener {
 
         Font Arial = new Font("Arial", Font.BOLD, 18);
         Font ArialParaLosTextAreas = new Font("Arial", Font.BOLD, 15);
-        
+
         botones = new JButton[10][10];
 
-        // Crear el contenedor principal (JPanel) con GridBagLayout
+        //Crear el jpanel principal con GridBagLayout
         JPanel mainPanel = new JPanel(new GridBagLayout());
         Color fondoMainPanel = new Color(12, 81, 109);
         mainPanel.setBackground(fondoMainPanel);
@@ -177,28 +175,27 @@ public class Tablero extends JFrame implements ActionListener {
         lblrango.setFont(Arial);
         lblidentidad.setFont(Arial);
 
-        // Establecer las restricciones para la primer jlabel
+        //Establecer las restricciones para la primera jlabel
         GridBagConstraints gbc1 = new GridBagConstraints();
-        gbc1.anchor = GridBagConstraints.NORTHEAST; 
-        gbc1.insets = new Insets(10, 10, 0, 0); // Márgenes internos de la etiqueta
-        gbc1.gridx = 6; // Posición en la cuadrícula X
-        gbc1.gridy = 1; // Posición en la cuadrícula Y
+        gbc1.anchor = GridBagConstraints.NORTHEAST;
+        gbc1.insets = new Insets(10, 10, 0, 0);
+        gbc1.gridx = 6; //X
+        gbc1.gridy = 1; //Y
 
-        // Establecer las restricciones para la segunda etiqueta
+        //restricciones para el segundo label
         GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.anchor = GridBagConstraints.NORTHEAST; 
-        gbc2.insets = new Insets(10, 10, 0, 0); // Márgenes internos de la etiqueta
-        gbc2.gridx = 6; // Posición en la cuadrícula X
-        gbc2.gridy = 0; // Posición en la cuadrícula Y
+        gbc2.anchor = GridBagConstraints.NORTHEAST;
+        gbc2.insets = new Insets(10, 10, 0, 0);
+        gbc2.gridx = 6; //X
+        gbc2.gridy = 0; //Y
 
-        // Agregar las etiquetas al panel principal con las restricciones
         mainPanel.add(lblrango, gbc1);
         mainPanel.add(lblidentidad, gbc2);
-        // Crear el JPanel adicional
+        //Crear el JPanel adicional
         JPanel panelAdicional = new JPanel();
         panelAdicional.setBackground(Color.black);
 
-        // Crear el JPanel del tablero
+        //Crear el JPanel del tablero
         JPanel tableroPanel = new JPanel();
         tableroPanel.setLayout(null);
         tableroPanel.setBounds(380, 100, 790, 628);
@@ -242,13 +239,13 @@ public class Tablero extends JFrame implements ActionListener {
         add(Bt_rendirse);
         Bt_rendirse.addActionListener(this);
 
-        // Agregar los botones al JPanel del tablero
+        //Agregar los botones al panel del tablero
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagConstraints gbcTurnos = new GridBagConstraints();
-        gbcTurnos.anchor = GridBagConstraints.NORTHWEST; // Ancla en la esquina superior izquierda
-        gbcTurnos.insets = new Insets(10, 10, 0, 0); // Márgenes internos del JLabel
-        gbcTurnos.gridx = 0; // Posición en la cuadrícula X
-        gbcTurnos.gridy = 0; // Posición en la cuadrícula Y
+        gbcTurnos.anchor = GridBagConstraints.NORTHWEST; 
+        gbcTurnos.insets = new Insets(10, 10, 0, 0); 
+        gbcTurnos.gridx = 0; //X
+        gbcTurnos.gridy = 0; //Y
 
         for (int fila = 0; fila < 10; fila++) {
             for (int columna = 0; columna < 10; columna++) {
@@ -270,8 +267,8 @@ public class Tablero extends JFrame implements ActionListener {
                         ponerIdentidadYRango();
                         hacerMovimientoYTurnos(boton, botonClickeado);
                         asignarColorBotones();
-                        if(controladorlogin.modoTutorial==false){
-                        moverimagen();
+                        if (controladorlogin.modoTutorial == false) {
+                            moverimagen();
                         }
                         System.out.println("veces clickeadas: " + vecesClickeadas);
                         if (GananHeroes == true || FichasRestantesVillanos == 0) {
@@ -282,7 +279,7 @@ public class Tablero extends JFrame implements ActionListener {
                                 cambio.dispose();
                                 menuprincipal.setVisible(true);
                                 dispose();
-                                
+
                             } else {
                                 controladorlogin.buscarUsuario(heroes).setPuntos(3);
                                 controladorlogin.vecesQueGanaronHeroes++;
@@ -321,51 +318,51 @@ public class Tablero extends JFrame implements ActionListener {
                 gbc.gridx = columna;
                 gbc.gridy = fila;
                 tableroPanel.add(boton, gbc);
-                botones[fila][columna] = boton; // Guardar el botón en la matriz
+                botones[fila][columna] = boton; //guardar el boton 
 
             }
         }
 
-        // Agregar el JPanel adicional al contenedor principal
+        //Agregar el panel adicional al panel principal
         gbc.gridx = 0;
         gbc.gridy = 0;
         mainPanel.add(panelAdicional, gbc);
 
-        // Agregar el JPanel del tablero al contenedor principal
+        //Agregar el panel del tablero al panel principal
         gbc.gridx = 0;
         gbc.gridy = 1;
         mainPanel.add(tableroPanel, gbc);
 
-        //Agregar el label de turnos al contenedor principal
+        //Agregar el label de turnos al panel principal
         mainPanel.add(labelTurno, gbcTurnos);
         labelTurno.setFont(Arial);
         labelTurno.setForeground(Color.WHITE);
 
-        // Agregar el contenedor principal al JFrame
+        //Agregar el panel principal al JFrame
         add(mainPanel);
 
         pack();
         setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Hacer que la ventana esté en pantalla completa
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
         setVisible(true);
 
-        //PARA EJECUTAR METODOS
+        //AQUI ES PARA EJECUTAR METODOS
         ponerFichasHeroes();
         ponerFichasVillanos();
         agregarArraylistsDenuevo();
         asignarColorBotones();
         ponerTextoAlLabelDeTurno();
         ponerZonaProhibida();
-     if(controladorlogin.modoTutorial==false){
-                        moverimagen();
-                        }
+        if (controladorlogin.modoTutorial == false) {
+            moverimagen();
+        }
 
     }
 
     private void ponerIdentidadYRango() {
         textoPrimeraFichaSeleccionada = botones[posicionInicialx][posicionInicialy].getText();
         //Para turno heroes
-        
+
         if (turnoHeroes == true) {
             if (rangos2Heroes.contains(textoPrimeraFichaSeleccionada)) {
                 lblrango.setText("Rango: 2");
@@ -596,7 +593,7 @@ public class Tablero extends JFrame implements ActionListener {
                         }
                     }
                 }
-                // Establecer la imagen en el botón
+                //pone la imagen en el boton
                 if (imagen != null) {
                     boton.setIcon(imagen);
                 }
@@ -676,8 +673,8 @@ public class Tablero extends JFrame implements ActionListener {
 
         //PONER LAS OTRAS TRES BOMBAS
         do {
-            int posicionFila = nAzarFila.nextInt(8, 10); // Número aleatorio de 1 a 20
-            int posicionColumna = nAzarColumna.nextInt(0, 10); // Número aleatorio de 1 a 20
+            int posicionFila = nAzarFila.nextInt(8, 10); 
+            int posicionColumna = nAzarColumna.nextInt(0, 10); 
             if (!botones[posicionFila][posicionColumna].getText().equals("tierraH") && !botones[posicionFila][posicionColumna].getText().equals("nova-blast") && !botones[posicionFila][posicionColumna].getText().equals("nova-blast")) {
                 colocarBombaH(posicionFila, posicionColumna);
                 numerodebombas++;
@@ -1055,9 +1052,9 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionInicialx][posicionInicialy].setText("");
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
-                    if(controladorlogin.modoTutorial==false){
+                    if (controladorlogin.modoTutorial == false) {
                         moverimagen();
-                        }
+                    }
                     lblrango.setText("");
                     lblidentidad.setText("");
                     cambio.setVisible(true);
@@ -1117,13 +1114,13 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionInicialx][posicionInicialy].setText("");
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
-                    if(controladorlogin.modoTutorial==false){
+                    if (controladorlogin.modoTutorial == false) {
                         moverimagen();
-                        }
+                    }
                     lblrango.setText("");
                     lblidentidad.setText("");
                     cambio.setVisible(true);
-                this.dispose();
+                    this.dispose();
                     turnoHeroes = true;
 
                     ponerTextoAlLabelDeTurno();
@@ -1537,19 +1534,19 @@ public class Tablero extends JFrame implements ActionListener {
         if (ganador.equals(textoPrimeraFichaSeleccionada) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == true) {
             JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nGana " + textoPrimeraFichaSeleccionada);
             botones[posicionInicialx][posicionInicialy].setText("");
-            if(controladorlogin.modoTutorial==false){
-                        moverimagen();
-                        }
+            if (controladorlogin.modoTutorial == false) {
+                moverimagen();
+            }
             asignarColorBotones();
             botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
-            if(controladorlogin.modoTutorial==false){
-                        moverimagen();
-                        }
+            if (controladorlogin.modoTutorial == false) {
+                moverimagen();
+            }
             asignarColorBotones();
             lblrango.setText("");
-                    lblidentidad.setText("");
+            lblidentidad.setText("");
             cambio.setVisible(true);
-                this.dispose();
+            this.dispose();
             turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
@@ -1562,9 +1559,9 @@ public class Tablero extends JFrame implements ActionListener {
 
             asignarColorBotones();
             lblrango.setText("");
-                    lblidentidad.setText("");
+            lblidentidad.setText("");
             cambio.setVisible(true);
-                this.dispose();
+            this.dispose();
             turnoHeroes = !turnoHeroes;
             ponerTextoAlLabelDeTurno();
             vecesClickeadas = 0;
@@ -1575,32 +1572,32 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("pumpkin-bomb")) {
                 JOptionPane.showMessageDialog(null, "Te has topado con una bomba!\nTu ficha ha sido destruida.");
                 botones[posicionInicialx][posicionInicialy].setText("");
-                if(controladorlogin.modoTutorial==false){
-                        moverimagen();
-                        }
+                if (controladorlogin.modoTutorial == false) {
+                    moverimagen();
+                }
                 asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
 
                 asignarColorBotones();
                 lblrango.setText("");
-                    lblidentidad.setText("");
+                lblidentidad.setText("");
                 cambio.setVisible(true);
                 this.dispose();
                 turnoHeroes = !turnoHeroes;
             } else {
                 JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nAmbos son eliminados.");
                 botones[posicionInicialx][posicionInicialy].setText("");
-                if(controladorlogin.modoTutorial==false){
-                        moverimagen();
-                        }
+                if (controladorlogin.modoTutorial == false) {
+                    moverimagen();
+                }
                 asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
-                if(controladorlogin.modoTutorial==false){
-                        moverimagen();
-                        }
+                if (controladorlogin.modoTutorial == false) {
+                    moverimagen();
+                }
                 asignarColorBotones();
                 lblrango.setText("");
-                    lblidentidad.setText("");
+                lblidentidad.setText("");
                 cambio.setVisible(true);
                 this.dispose();
                 turnoHeroes = !turnoHeroes;
@@ -1612,24 +1609,24 @@ public class Tablero extends JFrame implements ActionListener {
     }
 
     private boolean esMovimientoValido(int posicionInicialx, int posicionInicialy, int posicionFinalx, int posicionFinaly, String fichaSeleccionada) {
-        // Verificar si el movimiento es en línea recta en vertical u horizontal
+        //Ver si el movimiento es en línea recta
         if (rangos2Heroes.contains(fichaSeleccionada) || rangos2Villanos.contains(fichaSeleccionada)) {
             int deltaX = Math.abs(posicionFinalx - posicionInicialx);
             int deltaY = Math.abs(posicionFinaly - posicionInicialy);
 
             if (deltaX == 0 || deltaY == 0) {
-                // Movimiento horizontal o vertical
+                //Movimiento horizontal o vertical
                 return !hayFichasEnElCamino(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly);
             } else {
                 return false;
             }
         } else {
-            // Movimiento de una casilla en cualquier dirección (sin saltar fichas)
+            //Movimiento
             int deltaX = Math.abs(posicionFinalx - posicionInicialx);
             int deltaY = Math.abs(posicionFinaly - posicionInicialy);
 
             if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1)) {
-                // Movimiento horizontal o vertical de una casilla
+                //Movimiento horizontal o vertical
                 return true;
             } else {
                 return false;
@@ -1646,13 +1643,13 @@ public class Tablero extends JFrame implements ActionListener {
 
         while (x != posicionFinalx || y != posicionFinaly) {
             if (!botones[x][y].getText().equals("")) {
-                return true; // Hay una ficha en el camino
+                return true; //Hay una ficha en el camino
             }
             x += deltaX;
             y += deltaY;
         }
 
-        return false; // No hay fichas en el camino
+        return false; //No hay fichas en el camino
     }
 
     private void ponerTextoAlLabelDeTurno() {
