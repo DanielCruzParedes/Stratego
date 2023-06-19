@@ -2,13 +2,15 @@
 package stratego;
 
 public class cambioturno extends javax.swing.JFrame {
-  PedirSegundoPlayer pedirsegundoplayer;
-  ControladorLogin controladorlogin;
-  Login login;
-    public cambioturno(PedirSegundoPlayer pedirsegundoplayer,ControladorLogin controladorlogin,Login login) {
+  Tablero tablero;
+    public cambioturno(Tablero tablero) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setExtendedState(MAXIMIZED_BOTH);
+        this.tablero=tablero;
+        this.setExtendedState(this.getExtendedState() | javax.swing.JFrame.MAXIMIZED_BOTH);
+        this.setResizable(false);
+        
+        
         
     }
 
@@ -33,13 +35,13 @@ public class cambioturno extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel1.setText("\"Preparate para el cambio de turno. Haz click en ok cuando estes listo.\"");
+        jLabel1.setText("Preparate para el cambio de turno. Haz click en LISTO cuando estes listo.");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 1320, 200));
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jButton1.setText("ACEPTAR");
+        jButton1.setText("LISTO");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,7 +54,7 @@ public class cambioturno extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1495, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,7 +67,6 @@ public class cambioturno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Tablero tablero=new Tablero(pedirsegundoplayer,controladorlogin,login);
         tablero.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

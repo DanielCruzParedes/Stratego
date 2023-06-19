@@ -26,7 +26,8 @@ public class Tablero extends JFrame implements ActionListener {
     Login login;
     PedirSegundoPlayer pedirsegundoplayer;
     MenuPrincipal menuprincipal;
-    cambioturno cambio=new cambioturno( pedirsegundoplayer,controladorlogin,login);
+    cambioturno cambio = new cambioturno(this);
+
     public boolean turnoHeroes;
 
     private JButton Bt_rendirse;
@@ -60,6 +61,7 @@ public class Tablero extends JFrame implements ActionListener {
     //Crear los JLabel para mostrar los datos de la ficha
     JLabel lblrango = new JLabel("Rango");
     JLabel lblidentidad = new JLabel("Identidad");
+    
 
     public Tablero(PedirSegundoPlayer pedirsegundoplayer, ControladorLogin controladorlogin, Login login) {
         this.controladorlogin = controladorlogin;
@@ -172,16 +174,16 @@ public class Tablero extends JFrame implements ActionListener {
 
         // Establecer las restricciones para la primer jlabel
         GridBagConstraints gbc1 = new GridBagConstraints();
-        gbc1.anchor = GridBagConstraints.NORTHWEST; // Anclar en la esquina superior izquierda
+        gbc1.anchor = GridBagConstraints.NORTHEAST; 
         gbc1.insets = new Insets(10, 10, 0, 0); // Márgenes internos de la etiqueta
-        gbc1.gridx = 3; // Posición en la cuadrícula X
-        gbc1.gridy = 0; // Posición en la cuadrícula Y
+        gbc1.gridx = 6; // Posición en la cuadrícula X
+        gbc1.gridy = 1; // Posición en la cuadrícula Y
 
         // Establecer las restricciones para la segunda etiqueta
         GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.anchor = GridBagConstraints.NORTHWEST; // Anclar en la esquina superior izquierda
+        gbc2.anchor = GridBagConstraints.NORTHEAST; 
         gbc2.insets = new Insets(10, 10, 0, 0); // Márgenes internos de la etiqueta
-        gbc2.gridx = 1; // Posición en la cuadrícula X
+        gbc2.gridx = 6; // Posición en la cuadrícula X
         gbc2.gridy = 0; // Posición en la cuadrícula Y
 
         // Agregar las etiquetas al panel principal con las restricciones
@@ -344,6 +346,7 @@ public class Tablero extends JFrame implements ActionListener {
     private void ponerIdentidadYRango() {
         textoPrimeraFichaSeleccionada = botones[posicionInicialx][posicionInicialy].getText();
         //Para turno heroes
+        
         if (turnoHeroes == true) {
             if (rangos2Heroes.contains(textoPrimeraFichaSeleccionada)) {
                 lblrango.setText("Rango: 2");
@@ -1034,7 +1037,9 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
                     moverimagen();
-                    JOptionPane.showMessageDialog(null, "Hiciste un movimiento! Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
+                    lblrango.setText("");
+                    lblidentidad.setText("");
+                    cambio.setVisible(true);
                     turnoHeroes = false;
                     ponerTextoAlLabelDeTurno();
                     vecesClickeadas = 0;
@@ -1092,6 +1097,8 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
                     moverimagen();
+                    lblrango.setText("");
+                    lblidentidad.setText("");
                     cambio.setVisible(true);
                 this.dispose();
                     turnoHeroes = true;
@@ -1512,6 +1519,8 @@ public class Tablero extends JFrame implements ActionListener {
             botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
             moverimagen();
             asignarColorBotones();
+            lblrango.setText("");
+                    lblidentidad.setText("");
             cambio.setVisible(true);
                 this.dispose();
             turnoHeroes = !turnoHeroes;
@@ -1525,6 +1534,8 @@ public class Tablero extends JFrame implements ActionListener {
             botones[posicionFinalx][posicionFinaly].setText(textoSegundaFichaSeleccionada);
 
             asignarColorBotones();
+            lblrango.setText("");
+                    lblidentidad.setText("");
             cambio.setVisible(true);
                 this.dispose();
             turnoHeroes = !turnoHeroes;
@@ -1542,6 +1553,8 @@ public class Tablero extends JFrame implements ActionListener {
                 botones[posicionFinalx][posicionFinaly].setText("");
 
                 asignarColorBotones();
+                lblrango.setText("");
+                    lblidentidad.setText("");
                 cambio.setVisible(true);
                 this.dispose();
                 turnoHeroes = !turnoHeroes;
@@ -1553,6 +1566,8 @@ public class Tablero extends JFrame implements ActionListener {
                 botones[posicionFinalx][posicionFinaly].setText("");
                 moverimagen();
                 asignarColorBotones();
+                lblrango.setText("");
+                    lblidentidad.setText("");
                 cambio.setVisible(true);
                 this.dispose();
                 turnoHeroes = !turnoHeroes;
