@@ -29,12 +29,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnMiPerfil = new javax.swing.JButton();
         btncerrarsesion = new javax.swing.JButton();
         btnUniversoMarvel = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnStrategoMarvelHeroes.setBackground(new java.awt.Color(255, 0, 51));
         btnStrategoMarvelHeroes.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -44,6 +46,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnStrategoMarvelHeroesActionPerformed(evt);
             }
         });
+        jPanel1.add(btnStrategoMarvelHeroes, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 66, -1, 60));
 
         btnConfiguracion.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnConfiguracion.setText("CONFIGURACION");
@@ -52,6 +55,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnConfiguracionActionPerformed(evt);
             }
         });
+        jPanel1.add(btnConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 144, -1, 60));
 
         btnMiPerfil.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnMiPerfil.setText("MI PERFIL");
@@ -60,6 +64,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnMiPerfilActionPerformed(evt);
             }
         });
+        jPanel1.add(btnMiPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 216, -1, 60));
 
         btncerrarsesion.setBackground(new java.awt.Color(102, 102, 102));
         btncerrarsesion.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -69,6 +74,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btncerrarsesionActionPerformed(evt);
             }
         });
+        jPanel1.add(btncerrarsesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 372, -1, 60));
 
         btnUniversoMarvel.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnUniversoMarvel.setText("UNIVERSO MARVEL");
@@ -77,36 +83,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnUniversoMarvelActionPerformed(evt);
             }
         });
+        jPanel1.add(btnUniversoMarvel, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 294, -1, 60));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUniversoMarvel)
-                    .addComponent(btncerrarsesion)
-                    .addComponent(btnMiPerfil)
-                    .addComponent(btnStrategoMarvelHeroes)
-                    .addComponent(btnConfiguracion))
-                .addContainerGap(326, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(btnStrategoMarvelHeroes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMiPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUniversoMarvel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btncerrarsesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/T/menuprin.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,6 +148,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnStrategoMarvelHeroes;
     private javax.swing.JButton btnUniversoMarvel;
     private javax.swing.JButton btncerrarsesion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

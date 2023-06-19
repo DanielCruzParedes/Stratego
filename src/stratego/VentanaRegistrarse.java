@@ -41,15 +41,21 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtContraRegistro = new javax.swing.JPasswordField();
         btnRegresarALogin = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Sylfaen", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario: ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
+        jPanel1.add(txtUsuarioRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 244, 36));
 
         crearCuentaButton.setBackground(new java.awt.Color(0, 102, 255));
         crearCuentaButton.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -60,11 +66,21 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
                 crearCuentaButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(crearCuentaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 210, 50));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Sylfaen", 3, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
-        btnRegresarALogin.setBackground(new java.awt.Color(0, 102, 255));
+        txtContraRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraRegistroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtContraRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 244, 37));
+
+        btnRegresarALogin.setBackground(new java.awt.Color(204, 0, 0));
         btnRegresarALogin.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnRegresarALogin.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresarALogin.setText("Volver");
@@ -73,55 +89,15 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
                 btnRegresarALoginActionPerformed(evt);
             }
         });
+        jPanel1.add(btnRegresarALogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, 139, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegresarALogin, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addComponent(crearCuentaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jLabel1)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsuarioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContraRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(233, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtUsuarioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtContraRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addComponent(crearCuentaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegresarALogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-        );
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 3, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("REGISTRO");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 273, 45));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/T/registro.jpg"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 760, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,6 +148,10 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarALoginActionPerformed
 
+    private void txtContraRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraRegistroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,7 +191,9 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarALogin;
     private javax.swing.JButton crearCuentaButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtContraRegistro;
     private javax.swing.JTextField txtUsuarioRegistro;

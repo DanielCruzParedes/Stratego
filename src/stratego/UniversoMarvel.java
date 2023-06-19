@@ -26,12 +26,14 @@ public class UniversoMarvel extends javax.swing.JFrame {
         btnregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
-        btnranking.setBackground(new java.awt.Color(51, 51, 255));
+        btnranking.setBackground(new java.awt.Color(102, 0, 0));
         btnranking.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnranking.setForeground(new java.awt.Color(0, 0, 0));
+        btnranking.setForeground(new java.awt.Color(255, 255, 255));
         btnranking.setText("RANKING");
         btnranking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -39,9 +41,9 @@ public class UniversoMarvel extends javax.swing.JFrame {
             }
         });
 
-        btnbatallas.setBackground(new java.awt.Color(51, 51, 255));
+        btnbatallas.setBackground(new java.awt.Color(102, 0, 0));
         btnbatallas.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnbatallas.setForeground(new java.awt.Color(0, 0, 0));
+        btnbatallas.setForeground(new java.awt.Color(255, 255, 255));
         btnbatallas.setText("BATALLAS");
         btnbatallas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,9 +51,9 @@ public class UniversoMarvel extends javax.swing.JFrame {
             }
         });
 
-        btnregresar.setBackground(new java.awt.Color(51, 51, 255));
+        btnregresar.setBackground(new java.awt.Color(102, 0, 0));
         btnregresar.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnregresar.setForeground(new java.awt.Color(0, 0, 0));
+        btnregresar.setForeground(new java.awt.Color(255, 255, 255));
         btnregresar.setText("REGRESAR AL MENU PRINCIPAL");
         btnregresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,24 +65,27 @@ public class UniversoMarvel extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnbatallas, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnranking, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnbatallas, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addComponent(btnranking, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addComponent(btnregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(89, 89, 89))
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(btnregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(52, 52, 52)
                 .addComponent(btnranking, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnbatallas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

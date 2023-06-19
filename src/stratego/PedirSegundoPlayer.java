@@ -46,14 +46,17 @@ public String segundoPlayer;
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Player 1:");
 
         lblUsuarioLogeado.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblUsuarioLogeado.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Player 2:");
 
         txtSegundoPlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +65,9 @@ public String segundoPlayer;
             }
         });
 
-        btnJuego.setBackground(new java.awt.Color(0, 102, 153));
+        btnJuego.setBackground(new java.awt.Color(102, 0, 0));
         btnJuego.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        btnJuego.setForeground(new java.awt.Color(255, 255, 255));
         btnJuego.setText("CONFIRMAR");
         btnJuego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,8 +75,9 @@ public String segundoPlayer;
             }
         });
 
-        btnExit.setBackground(new java.awt.Color(0, 102, 153));
+        btnExit.setBackground(new java.awt.Color(102, 0, 0));
         btnExit.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

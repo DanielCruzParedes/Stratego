@@ -71,6 +71,7 @@ public class Tablero extends JFrame implements ActionListener {
         this.pedirsegundoplayer = pedirsegundoplayer;
         this.menuprincipal = new MenuPrincipal(login, controladorlogin);
         this.configuracion = new Configuracion(login, controladorlogin);
+        this.setUndecorated(true);
         fichaseliminadasH.fichas.clear();
         fichaseliminadasV.fichas.clear();
         if (pedirsegundoplayer.bandoElegido.equals("HEROES")) {

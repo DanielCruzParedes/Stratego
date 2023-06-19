@@ -30,6 +30,7 @@ public class Configuracion extends javax.swing.JFrame {
         activarmodoclasico = new javax.swing.JButton();
         btnRegresarAMenuPrincipal = new javax.swing.JButton();
         btnvideo = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         activarmodotutorial1.setBackground(new java.awt.Color(51, 51, 255));
         activarmodotutorial1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -45,28 +46,38 @@ public class Configuracion extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Configuracion");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 30));
 
-        activarmodotutorial.setBackground(new java.awt.Color(51, 51, 255));
-        activarmodotutorial.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        activarmodotutorial.setBackground(new java.awt.Color(0, 0, 102));
+        activarmodotutorial.setFont(new java.awt.Font("Trajan Pro", 1, 24)); // NOI18N
+        activarmodotutorial.setForeground(new java.awt.Color(255, 255, 255));
         activarmodotutorial.setText("MODO TUTORIAL");
+        activarmodotutorial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         activarmodotutorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activarmodotutorialActionPerformed(evt);
             }
         });
+        jPanel1.add(activarmodotutorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 420, 90));
 
-        activarmodoclasico.setBackground(new java.awt.Color(51, 51, 255));
-        activarmodoclasico.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        activarmodoclasico.setBackground(new java.awt.Color(0, 0, 102));
+        activarmodoclasico.setFont(new java.awt.Font("Trajan Pro", 1, 24)); // NOI18N
+        activarmodoclasico.setForeground(new java.awt.Color(255, 255, 255));
         activarmodoclasico.setText("MODO CLASICO");
+        activarmodoclasico.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         activarmodoclasico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activarmodoclasicoActionPerformed(evt);
             }
         });
+        jPanel1.add(activarmodoclasico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 420, 90));
 
         btnRegresarAMenuPrincipal.setBackground(new java.awt.Color(255, 51, 51));
         btnRegresarAMenuPrincipal.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -76,55 +87,24 @@ public class Configuracion extends javax.swing.JFrame {
                 btnRegresarAMenuPrincipalActionPerformed(evt);
             }
         });
+        jPanel1.add(btnRegresarAMenuPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 344, 63));
 
-        btnvideo.setBackground(new java.awt.Color(51, 51, 255));
-        btnvideo.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        btnvideo.setBackground(new java.awt.Color(0, 0, 102));
+        btnvideo.setFont(new java.awt.Font("Trajan Pro", 1, 24)); // NOI18N
+        btnvideo.setForeground(new java.awt.Color(255, 255, 255));
         btnvideo.setText("VIDEO");
+        btnvideo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnvideo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnvideoActionPerformed(evt);
             }
         });
+        jPanel1.add(btnvideo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 118, 90));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(btnRegresarAMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(activarmodoclasico, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(activarmodotutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnvideo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(165, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(activarmodotutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnvideo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(activarmodoclasico, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnRegresarAMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/T/config.jpg"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 470));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 640));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -174,6 +154,7 @@ public class Configuracion extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarAMenuPrincipal;
     private javax.swing.JButton btnvideo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
