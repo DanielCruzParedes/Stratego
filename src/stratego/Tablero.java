@@ -21,7 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class Tablero extends JFrame implements ActionListener {
+ 
 
+    
     ControladorLogin controladorlogin;
     Login login;
     PedirSegundoPlayer pedirsegundoplayer;

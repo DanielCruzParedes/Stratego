@@ -43,32 +43,25 @@ public class CambiarPassword extends javax.swing.JFrame {
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Cambiar contraseña de");
 
         lblUsuarioLogeado.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
-        lblUsuarioLogeado.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuarioLogeado.setText("Usuario");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Ingrese la constraseña actual:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Ingrese la nueva contraseña:");
-
-        txtContraActual.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtContraNueva.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setBackground(new java.awt.Color(51, 153, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +71,6 @@ public class CambiarPassword extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(204, 0, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

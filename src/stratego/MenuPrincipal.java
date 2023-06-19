@@ -31,12 +31,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUniversoMarvel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
         btnStrategoMarvelHeroes.setBackground(new java.awt.Color(255, 0, 51));
         btnStrategoMarvelHeroes.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnStrategoMarvelHeroes.setForeground(new java.awt.Color(0, 0, 0));
         btnStrategoMarvelHeroes.setText("STRATEGO - MARVEL HEROES");
         btnStrategoMarvelHeroes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -44,9 +45,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnConfiguracion.setBackground(new java.awt.Color(255, 255, 255));
         btnConfiguracion.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnConfiguracion.setForeground(new java.awt.Color(0, 0, 0));
         btnConfiguracion.setText("CONFIGURACION");
         btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,9 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnMiPerfil.setBackground(new java.awt.Color(255, 255, 255));
         btnMiPerfil.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnMiPerfil.setForeground(new java.awt.Color(0, 0, 0));
         btnMiPerfil.setText("MI PERFIL");
         btnMiPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +63,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         btncerrarsesion.setBackground(new java.awt.Color(102, 102, 102));
         btncerrarsesion.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btncerrarsesion.setForeground(new java.awt.Color(0, 0, 0));
         btncerrarsesion.setText("CERRAR SESION");
         btncerrarsesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,9 +70,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnUniversoMarvel.setBackground(new java.awt.Color(255, 255, 255));
         btnUniversoMarvel.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnUniversoMarvel.setForeground(new java.awt.Color(0, 0, 0));
         btnUniversoMarvel.setText("UNIVERSO MARVEL");
         btnUniversoMarvel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

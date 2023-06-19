@@ -30,6 +30,8 @@ public class EliminarMiCuenta extends javax.swing.JFrame {
         txtConfirmarContra = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -39,12 +41,10 @@ public class EliminarMiCuenta extends javax.swing.JFrame {
         jLabelTexto.setText("Cuenta que se eliminará:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Ingrese la constraseña actual:");
 
         jButton1.setBackground(new java.awt.Color(0, 102, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +54,6 @@ public class EliminarMiCuenta extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(204, 0, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Eliminar mi cuenta");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,12 +63,9 @@ public class EliminarMiCuenta extends javax.swing.JFrame {
 
         lblUsuarioLog.setBackground(new java.awt.Color(255, 255, 255));
         lblUsuarioLog.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        lblUsuarioLog.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuarioLog.setText("Usuario");
 
-        txtConfirmarContra.setBackground(new java.awt.Color(255, 255, 255));
         txtConfirmarContra.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        txtConfirmarContra.setForeground(new java.awt.Color(0, 0, 0));
         txtConfirmarContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmarContraActionPerformed(evt);

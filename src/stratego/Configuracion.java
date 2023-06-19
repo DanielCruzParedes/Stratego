@@ -33,7 +33,6 @@ public class Configuracion extends javax.swing.JFrame {
 
         activarmodotutorial1.setBackground(new java.awt.Color(51, 51, 255));
         activarmodotutorial1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        activarmodotutorial1.setForeground(new java.awt.Color(0, 0, 0));
         activarmodotutorial1.setText("MODO TUTORIAL");
         activarmodotutorial1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,6 +41,8 @@ public class Configuracion extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -51,7 +52,6 @@ public class Configuracion extends javax.swing.JFrame {
 
         activarmodotutorial.setBackground(new java.awt.Color(51, 51, 255));
         activarmodotutorial.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        activarmodotutorial.setForeground(new java.awt.Color(0, 0, 0));
         activarmodotutorial.setText("MODO TUTORIAL");
         activarmodotutorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +61,6 @@ public class Configuracion extends javax.swing.JFrame {
 
         activarmodoclasico.setBackground(new java.awt.Color(51, 51, 255));
         activarmodoclasico.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        activarmodoclasico.setForeground(new java.awt.Color(0, 0, 0));
         activarmodoclasico.setText("MODO CLASICO");
         activarmodoclasico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +79,6 @@ public class Configuracion extends javax.swing.JFrame {
 
         btnvideo.setBackground(new java.awt.Color(51, 51, 255));
         btnvideo.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnvideo.setForeground(new java.awt.Color(0, 0, 0));
         btnvideo.setText("VIDEO");
         btnvideo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,8 +151,9 @@ public class Configuracion extends javax.swing.JFrame {
 
     private void btnvideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvideoActionPerformed
         try {
-        String videoPath = "videoTutorial/tutorial.MOV";
+        String videoPath = "src/videoTutorial/tutorial.MOV";
         File videoFile = new File(videoPath);
+        
         
         if (videoFile.exists()) {
             Desktop.getDesktop().open(videoFile);

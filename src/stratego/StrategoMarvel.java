@@ -30,12 +30,13 @@ public class StrategoMarvel extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 51));
 
         btnregresar.setBackground(new java.awt.Color(51, 51, 255));
         btnregresar.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnregresar.setForeground(new java.awt.Color(0, 0, 0));
         btnregresar.setText("REGRESAR");
         btnregresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,7 +46,6 @@ public class StrategoMarvel extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(51, 51, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("PARTIDA NUEVA");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
