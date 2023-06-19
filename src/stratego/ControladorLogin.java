@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class ControladorLogin {
     private String text;
+    public boolean modoTutorial;
     ControladorLogin controladorlogin;
     ArrayList<Usuario>listaUsuarios;
     public String UsuarioLogeado;

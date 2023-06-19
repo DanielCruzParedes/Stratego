@@ -26,6 +26,7 @@ public class Tablero extends JFrame implements ActionListener {
     Login login;
     PedirSegundoPlayer pedirsegundoplayer;
     MenuPrincipal menuprincipal;
+    Configuracion configuracion;
     cambioturno cambio = new cambioturno(this);
 
     public boolean turnoHeroes;
@@ -68,6 +69,7 @@ public class Tablero extends JFrame implements ActionListener {
         this.login = login;
         this.pedirsegundoplayer = pedirsegundoplayer;
         this.menuprincipal = new MenuPrincipal(login, controladorlogin);
+        this.configuracion=new Configuracion(login, controladorlogin);
         fichaseliminadasH.fichas.clear();
         fichaseliminadasV.fichas.clear();
         if (pedirsegundoplayer.bandoElegido.equals("HEROES")) {
@@ -264,7 +266,9 @@ public class Tablero extends JFrame implements ActionListener {
                         ponerIdentidadYRango();
                         hacerMovimientoYTurnos(boton, botonClickeado);
                         asignarColorBotones();
+                        if(controladorlogin.modoTutorial==false){
                         moverimagen();
+                        }
                         System.out.println("veces clickeadas: " + vecesClickeadas);
                         if (GananHeroes == true || FichasRestantesVillanos == 0) {
                             if (FichasRestantesVillanos == 0) {
@@ -339,7 +343,9 @@ public class Tablero extends JFrame implements ActionListener {
         asignarColorBotones();
         ponerTextoAlLabelDeTurno();
         ponerZonaProhibida();
-        moverimagen();
+     if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
 
     }
 
@@ -1036,7 +1042,9 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionInicialx][posicionInicialy].setText("");
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
-                    moverimagen();
+                    if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
                     lblrango.setText("");
                     lblidentidad.setText("");
                     cambio.setVisible(true);
@@ -1096,7 +1104,9 @@ public class Tablero extends JFrame implements ActionListener {
                     botones[posicionInicialx][posicionInicialy].setText("");
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
-                    moverimagen();
+                    if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
                     lblrango.setText("");
                     lblidentidad.setText("");
                     cambio.setVisible(true);
@@ -1514,10 +1524,14 @@ public class Tablero extends JFrame implements ActionListener {
         if (ganador.equals(textoPrimeraFichaSeleccionada) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == true) {
             JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nGana " + textoPrimeraFichaSeleccionada);
             botones[posicionInicialx][posicionInicialy].setText("");
-            moverimagen();
+            if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
             asignarColorBotones();
             botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
-            moverimagen();
+            if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
             asignarColorBotones();
             lblrango.setText("");
                     lblidentidad.setText("");
@@ -1548,7 +1562,9 @@ public class Tablero extends JFrame implements ActionListener {
             if (textoSegundaFichaSeleccionada.equals("pumpkin-bomb")) {
                 JOptionPane.showMessageDialog(null, "Te has topado con una bomba!\nTu ficha ha sido destruida.");
                 botones[posicionInicialx][posicionInicialy].setText("");
-                moverimagen();
+                if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
                 asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
 
@@ -1561,10 +1577,14 @@ public class Tablero extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nAmbos son eliminados.");
                 botones[posicionInicialx][posicionInicialy].setText("");
-                moverimagen();
+                if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
                 asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
-                moverimagen();
+                if(controladorlogin.modoTutorial==false){
+                        moverimagen();
+                        }
                 asignarColorBotones();
                 lblrango.setText("");
                     lblidentidad.setText("");
