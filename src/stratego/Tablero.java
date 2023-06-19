@@ -459,8 +459,7 @@ private void moverimagen(){
             } 
                if (rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton) || textoBoton.equals("nova-blast") || textoBoton.equals("tierraH")) {
                 imagen = new ImageIcon(getClass().getResource("/imagenes/Heroes/fondoheroes.jpg"));
-            }    
-            
+            }            
                 if(turnoHeroes==false){
                 if(rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton)) {
                 boton.setIcon(null);
@@ -1407,9 +1406,10 @@ private void moverimagen(){
         if (ganador.equals(textoPrimeraFichaSeleccionada) && esMovimientoValido(posicionInicialx, posicionInicialy, posicionFinalx, posicionFinaly, textoPrimeraFichaSeleccionada) == true) {
             JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nGana " + textoPrimeraFichaSeleccionada);
             botones[posicionInicialx][posicionInicialy].setText("");
-            
+            moverimagen();
             asignarColorBotones();
             botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
+            moverimagen();
             asignarColorBotones();
             JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
             turnoHeroes = !turnoHeroes;
@@ -1434,7 +1434,7 @@ private void moverimagen(){
             if (textoSegundaFichaSeleccionada.equals("pumpkin-bomb")) {
                 JOptionPane.showMessageDialog(null, "Te has topado con una bomba!\nTu ficha ha sido destruida.");
                 botones[posicionInicialx][posicionInicialy].setText("");
-                
+                moverimagen();
                  asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
                 
@@ -1444,10 +1444,10 @@ private void moverimagen(){
             } else {
                 JOptionPane.showMessageDialog(null, textoPrimeraFichaSeleccionada + " vs " + textoSegundaFichaSeleccionada + "\nAmbos son eliminados.");
                 botones[posicionInicialx][posicionInicialy].setText("");
-                
+                moverimagen();
                  asignarColorBotones();
                 botones[posicionFinalx][posicionFinaly].setText("");
-               
+               moverimagen();
                 asignarColorBotones();
                 JOptionPane.showMessageDialog(null, "Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
                 turnoHeroes = !turnoHeroes;
