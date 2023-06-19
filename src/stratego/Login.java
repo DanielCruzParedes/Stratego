@@ -1,7 +1,5 @@
 package stratego;
 
-import java.awt.event.ActionEvent;
-import java.util.Map;
 import javax.swing.JOptionPane;
 //PRUEBA A VER SI ESTO SE ELIMINA
 public class Login extends javax.swing.JFrame {
@@ -36,19 +34,30 @@ public class Login extends javax.swing.JFrame {
         crearCuentaButton = new javax.swing.JButton();
         contrasenaPasswordField = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
         setPreferredSize(new java.awt.Dimension(814, 490));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Light", 3, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 157, -1));
-        jPanel1.add(usuarioTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 244, 44));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 157, -1));
+
+        usuarioTextField.setBackground(new java.awt.Color(0, 0, 0));
+        usuarioTextField.setForeground(new java.awt.Color(204, 204, 204));
+        usuarioTextField.setText("ejem.usuario123");
+        usuarioTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(usuarioTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 214, 244, 40));
 
         loginButton.setBackground(new java.awt.Color(0, 102, 255));
         loginButton.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -59,7 +68,7 @@ public class Login extends javax.swing.JFrame {
                 loginButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 140, 50));
+        jPanel1.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 140, 50));
 
         crearCuentaButton.setBackground(new java.awt.Color(0, 102, 255));
         crearCuentaButton.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -70,22 +79,30 @@ public class Login extends javax.swing.JFrame {
                 crearCuentaButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(crearCuentaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 210, 50));
-        jPanel1.add(contrasenaPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 244, 48));
+        jPanel1.add(crearCuentaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 210, 50));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
+        contrasenaPasswordField.setBackground(new java.awt.Color(0, 0, 0));
+        contrasenaPasswordField.setForeground(new java.awt.Color(204, 204, 204));
+        contrasenaPasswordField.setText("ejem.usuario123");
+        jPanel1.add(contrasenaPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 278, 244, 40));
+
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 3, 28)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/T/avengersLogin.jpg"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 760, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -127,6 +144,10 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    private void usuarioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -166,6 +187,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField contrasenaPasswordField;
     private javax.swing.JButton crearCuentaButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;

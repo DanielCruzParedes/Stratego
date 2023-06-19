@@ -8,14 +8,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Login login;
     ControladorLogin controladorlogin;
 
-    /**
-     * Creates new form MenuPrincipal
-     */
     public MenuPrincipal(Login login, ControladorLogin controladorlogin) {
         
         initComponents();
         setLocationRelativeTo(this);
-        
+    
         this.login=login;
         this.controladorlogin=controladorlogin;
     }

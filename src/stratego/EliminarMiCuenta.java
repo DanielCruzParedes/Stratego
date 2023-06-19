@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class EliminarMiCuenta extends javax.swing.JFrame {
     Login login;
-    Usuario usuario;
+ 
     ControladorLogin controladorlogin;
     
     

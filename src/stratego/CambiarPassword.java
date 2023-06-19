@@ -159,10 +159,10 @@ public class CambiarPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String usuario = controladorlogin.UsuarioLogeado;
+        String user = controladorlogin.UsuarioLogeado;
         String contrasena = new String(txtContraActual.getText());
         
-        Usuario aux = controladorlogin.buscarUsuario(usuario);
+        Usuario aux = controladorlogin.buscarUsuario(user);
         
         if(txtContraNueva.getText().length()<5){
             JOptionPane.showMessageDialog(null, "La nueva contraseña debe de ser de exactamente 5 caracteres.");

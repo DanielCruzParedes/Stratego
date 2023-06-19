@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -263,6 +264,7 @@ public class Tablero extends JFrame implements ActionListener {
                         rangos2Heroes.contains(textoPrimeraFichaSeleccionada);
                         hacerMovimientoYTurnos(boton, botonClickeado);
                         asignarColorBotones();
+                        moverimagen();
                         System.out.println("veces clickeadas: " + vecesClickeadas);
                         if (GananHeroes == true || FichasRestantesVillanos == 0) {
                             if(FichasRestantesVillanos == 0){
@@ -338,10 +340,11 @@ public class Tablero extends JFrame implements ActionListener {
         asignarColorBotones();
         ponerTextoAlLabelDeTurno();
         ponerZonaProhibida();
+        moverimagen();
 
         
     }
-
+       
     
     private void ponerIdentidadYRango(){
         //Para turno heroes
@@ -428,7 +431,51 @@ String fichaSinUltimaLetra = nombreFicha.substring(0, textoPrimeraFichaSeleccion
 
         }
     }
+private void moverimagen(){
+     for(int i=0;i<10;i++){
+    for(int j=0;j<10;j++){
+     ImageIcon imagen = null;   
+     JButton boton=botones[i][j];
+      String textoBoton = boton.getText();
 
+            if(pedirsegundoplayer.bandoElegido.equals("HEROES")){
+            if (textoBoton.equals("")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondoblanco.png"));
+            } 
+               if (rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton) || textoBoton.equals("pumpkin-bomb") ||textoBoton.equals("tierraV")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondovillanos.png"));
+            }    
+               if(turnoHeroes==true){
+                if(rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton)) {
+                boton.setIcon(null);
+                
+                }
+                }
+            }
+            else
+                if(pedirsegundoplayer.bandoElegido.equals("VILLANOS")){
+              if (textoBoton.equals("")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/villanos/fondoblanco.png"));
+            } 
+               if (rangos2Heroes.contains(textoBoton) || rangossobrantesH.contains(textoBoton) || textoBoton.equals("nova-blast") || textoBoton.equals("tierraH")) {
+                imagen = new ImageIcon(getClass().getResource("/imagenes/Heroes/fondoheroes.jpg"));
+            }    
+            
+                if(turnoHeroes==false){
+                if(rangos2Villanos.contains(textoBoton) || rangossobrantesV.contains(textoBoton)) {
+                boton.setIcon(null);
+                }
+                }
+            }
+            // Establecer la imagen en el botón
+            if (imagen != null) {
+                boton.setIcon(imagen);
+            }
+        }
+    }
+
+    
+   }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Bt_rendirse) {
             int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea rendirse?", "", JOptionPane.YES_NO_OPTION);
@@ -879,6 +926,7 @@ String fichaSinUltimaLetra = nombreFicha.substring(0, textoPrimeraFichaSeleccion
                     botones[posicionInicialx][posicionInicialy].setText("");
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
+                    moverimagen();
                     JOptionPane.showMessageDialog(null, "Hiciste un movimiento! Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
                     turnoHeroes = false;
                     ponerTextoAlLabelDeTurno();
@@ -937,6 +985,7 @@ String fichaSinUltimaLetra = nombreFicha.substring(0, textoPrimeraFichaSeleccion
                     botones[posicionInicialx][posicionInicialy].setText("");
                     botones[posicionFinalx][posicionFinaly].setText(textoPrimeraFichaSeleccionada);
                     asignarColorBotones();
+                    moverimagen();
                     JOptionPane.showMessageDialog(null, "Hiciste un movimiento! Preparate para el cambio de turno. Haz click en ok cuando estes listo.");
                     turnoHeroes = true;
 
